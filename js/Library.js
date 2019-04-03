@@ -1,14 +1,19 @@
 class Library {
   constructor(){
     this.cards = buildLibrary();
-    this.cardsRemaining = 108;
-    this.cardsUsed = 0;
+    this.cardsRemaining = this.cards.length;
+    this.cardsUsed = 108-this.cards.length;
   }
   shuffle(){
-
+    for (var i = this.cards.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = this.cards[i];
+        this.cards[i] = this.cards[j];
+        this.cards[j] = temp;
+    }
   }
   deal(players){
-
+    
   }
   flipCard(){
 
@@ -33,7 +38,7 @@ const buildLibrary = () => {
       }
     }
   }
-  //Make special cards
+  //Make special ('black') cards
   for (let i = 0; i < specialValues.length; i++) {
     const card = {
       color: 'black',
