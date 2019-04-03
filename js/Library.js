@@ -12,12 +12,6 @@ class Library {
         this.cards[j] = temp;
     }
   }
-  deal(players){
-    
-  }
-  flipCard(){
-
-  }
 }
 
 const buildLibrary = () => {
