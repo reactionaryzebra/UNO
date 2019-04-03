@@ -12,6 +12,9 @@ class Library {
         this.cards[j] = temp;
     }
   }
+  flipCard(){
+    return this.cards.pop();
+  }
 }
 
 const buildLibrary = () => {

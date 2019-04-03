@@ -27,7 +27,6 @@ const game = {
     //Assign active player
     //Render
   }
-
 }
 
 const deal = (player, numCards) => {
