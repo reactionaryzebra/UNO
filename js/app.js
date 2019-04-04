@@ -1,31 +1,41 @@
 let deck;
+let game;
 let numPlayers;
 let legalPlay = false;
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
 
 
-const startGame(playersArr) {
+const shuffle = (array) => {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
+}
+
+const startGame = (namesArr) => {
   //Create new game object
   game = new Game
   //Create the requisite number of players
-  playersArr.forEach(player => {
-    if (player.type === 'human'){
-      const newHumanPlayer = new player
-      game.players.push(newHuanPlayer)
-    } else {
+  namesArr.forEach(name => {
+    if (name === 'HAL9000'){
       const newComputerPlayer = new ComputerPlayer
       game.players.push(newComputerPlayer)
+    } else {
+      const newHumanPlayer = new Player(name)
+      game.players.push(newHumanPlayer)
     }
   })
   //Roll die to see who goes first
-  shuffle(players)
+  shuffle(game.players)
   //Make ^^ person active player
   game.activePlayer = game.players[0]
   //Create a new deck
   deck = new Library
   //Shuffle the deck
-  shuffle(deck)
+  shuffle(deck.cards)
   //Deal 7 to each player
   game.players.forEach(player => {
     deal(player, 7)
@@ -33,15 +43,6 @@ const startGame(playersArr) {
   //Flip a card
   game.cardsInPlay.unshift(deck.cards.pop())
   game.activeCard = game.cardsInPlay[0]
-}
-
-const shuffle(array){
-  for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-  }
 }
 
 const deal = (player, numCards) => {
