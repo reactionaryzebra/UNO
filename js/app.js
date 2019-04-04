@@ -9,6 +9,9 @@ const selectHumanPlayers = document.getElementById('select-human-players')
 const turnScreen = document.getElementById('turn-screen')
 const turnMessage = document.getElementById('turn-message')
 const readyButton = document.querySelector('.ready')
+const activePlayerHand = document.querySelector('.active-player')
+const deckDiv = document.querySelector('.deck')
+const cardsInPlayDiv = document.querySelector('.cards-in-play')
 
 const startGame = (namesArr) => {
   //Create new game object
@@ -50,7 +53,7 @@ const startTurn = () => {
   if (!legalPlay) {
     needToDraw = true;
   }
-  // renderTable();
+  renderTable();
 }
 
 const endTurn = () => {
@@ -60,7 +63,7 @@ const endTurn = () => {
 
 const checkForWinner = () => {
   if (game.activePlayer.hand.length === 0){
-    showWinnerScreen()
+    renderWinnerScreen()
   }
 }
 
@@ -105,6 +108,17 @@ const checkForUno = (players) => {
 const renderTurnScreen = () => {
   turnScreen.classList.toggle('visible')
   turnMessage.innerText = `It's ${game.activePlayer.name}'s turn.  Everyone else avert your eyes'`
+}
+
+const renderTable = () => {
+  game.activePlayer.hand.forEach(card => {
+    const cardDiv = document.createElement('div')
+    cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
+    cardDiv.classList.add('card')
+    activePlayerHand.appendChild(cardDiv)
+  })
+  deckDiv.style.backgroundImage = `url(images/large/back.png)`
+  cardsInPlayDiv.style.backgroundImage = `url(images/large/${game.activeCard.color}_${game.activeCard.value}.png)`
 }
 
 selectNumPlayers.addEventListener('click', e => {

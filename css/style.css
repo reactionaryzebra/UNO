@@ -81,10 +81,17 @@
   width: 40%
 }
 
-.cards-in-play {
-  background-color: white;
+.cards-in-play, .deck {
+  background-size: cover;
 }
 
-.deck {
-  background-color: black;
+.active-player {
+  display:flex;
+  justify-content: flex-start;
+}
+
+.card {
+  flex:0, 1, auto;
+  width: 14%;
+  height: 100%;
 }
