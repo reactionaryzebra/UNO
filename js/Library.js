@@ -4,14 +4,6 @@ class Library {
     this.cardsRemaining = this.cards.length;
     this.cardsUsed = 108-this.cards.length;
   }
-  shuffle(){
-    for (var i = this.cards.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = this.cards[i];
-        this.cards[i] = this.cards[j];
-        this.cards[j] = temp;
-    }
-  }
   flipCard(){
     return this.cards.pop();
   }
@@ -48,7 +40,7 @@ const buildLibrary = () => {
         color: 'black',
         value: specialValues[i]
       }
-      library.push(card)    
+      library.push(card)
     }
   }
   //Give all cards unique ID // BUG: identical IDs for duplicate cards

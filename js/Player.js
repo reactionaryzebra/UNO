@@ -10,7 +10,7 @@ class Player {
     card.handPosition = null
     game.activeCard = card
     for (let i = 0; i < this.hand.length; i++) {
-      this.hand[i].handPosition = i          
+      this.hand[i].handPosition = i
     }
   }
 }
