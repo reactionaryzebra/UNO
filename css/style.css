@@ -1,5 +1,5 @@
 .modal {
-  display: block; /* Hidden by default */
+  display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -11,12 +11,26 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 .modal-content {
+  display: none;
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+  height: 30%;
 }
 .container {
   background-color: pink;
+}
+
+.player-3-selector {
+  display: none;
+}
+
+.player-4-selector {
+  display: none;
+}
+
+.visible {
+  display: flex;
 }

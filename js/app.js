@@ -3,6 +3,11 @@ let numPlayers;
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
 
+selectNumPlayers.addEventListener('click', (e) => {
+  numPlayers = e.target.innerText;
+  game.init();
+})
+
 const game = {
   players: [],
   seats: [],
@@ -10,14 +15,15 @@ const game = {
   activeCard: {},
   activePlayer: {},
   init(){
-    //Display graphic to allow User to select # players
+    //Hide graphic to select # players
+    selectNumPlayers.classList.toggle('visible')
     //Display graphic to allow User to slect # computer players
     selectHumanPlayers.classList.toggle('visible')
-    if (numPlayers === 4){
-      document.getElementById('player-3-selector').classList.toggle('visible')
-      document.getElementById('player-4-selector').classList.toggle('visible')
-    } else if (numPlayers === 3){
-      document.getElementById('player-3-selector').classList.toggle('visible')
+    if (numPlayers === '4'){
+      document.querySelectorAll('.player-3-selector').forEach(node => node.classList.toggle('visible'))
+      document.querySelectorAll('.player-4-selector').forEach(node => node.classList.toggle('visible'))
+    } else if (numPlayers === '3'){
+      document.querySelectorAll('.player-3-selector').forEach(node => node.classList.toggle('visible'))
     }
     //Display graphic to ask User their name
     //Set players array to players based on previous input
