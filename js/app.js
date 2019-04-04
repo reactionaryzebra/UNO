@@ -2,6 +2,7 @@ let deck;
 let game;
 let numPlayers;
 let legalPlay = false;
+let needToDraw = false;
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
 
@@ -20,7 +21,7 @@ const startGame = (namesArr) => {
   })
   //Set random play order
   shuffle(game.players)
-  //Make ^^ person active player
+  //Set active Player
   game.activePlayer = game.players[0]
   //Create a new deck
   deck = new Library
@@ -33,6 +34,27 @@ const startGame = (namesArr) => {
   //Flip a card
   game.cardsInPlay.unshift(deck.cards.pop())
   game.activeCard = game.cardsInPlay[0]
+  //Start first player's turn
+  startTurn()
+}
+
+const startTurn = () => {
+  checkLegal(game.activePlayer.hand)
+  if (!legalPlay) {
+    needToDraw = true;
+  }
+  renderTable();
+}
+
+const endTurn = () => {
+  checkForWinner()
+  switchPlayer()
+}
+
+const checkForWinner = () => {
+  if (activePlayer.hand.length === 0){
+    showWinnerScreen()
+  }
 }
 
 const shuffle = (array) => {
