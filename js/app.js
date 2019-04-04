@@ -57,8 +57,11 @@ const startTurn = () => {
 }
 
 const endTurn = () => {
+  renderTable()
   checkForWinner()
   switchPlayer()
+  modal.classList.toggle('visible')
+  renderTurnScreen()
 }
 
 const checkForWinner = () => {
@@ -111,10 +114,12 @@ const renderTurnScreen = () => {
 }
 
 const renderTable = () => {
+  activePlayerHand.innerHTML = ''
   game.activePlayer.hand.forEach(card => {
     const cardDiv = document.createElement('div')
     cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
     cardDiv.classList.add('card')
+    cardDiv.setAttribute('data-handposition', card.handPosition)
     activePlayerHand.appendChild(cardDiv)
   })
   deckDiv.style.backgroundImage = `url(images/large/back.png)`
@@ -141,4 +146,10 @@ readyButton.addEventListener('click', e => {
   turnScreen.classList.toggle('visible')
   modal.classList.toggle('visible')
   startTurn()
+})
+
+activePlayerHand.addEventListener('click', e => {
+  if (game.activePlayer.hand[e.target.dataset.handposition].isLegal === true){
+    game.activePlayer.play(game.activePlayer.hand[e.target.dataset.handposition])
+  }
 })

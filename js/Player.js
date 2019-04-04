@@ -13,6 +13,7 @@ class Player {
     game.activeCard = card
     for (let i = 0; i < this.hand.length; i++) {
       this.hand[i].handPosition = i
-    }
+    };
+    endTurn()
   }
 }
