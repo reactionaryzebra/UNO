@@ -4,11 +4,6 @@ let legalPlay = false;
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
 
-selectNumPlayers.addEventListener('click', (e) => {
-  numPlayers = e.target.innerText;
-  game.init();
-})
-
 const game = {
   players: [],
   seats: [],
@@ -70,3 +65,8 @@ const checkForUno = (players) => {
     }
   })
 }
+
+selectNumPlayers.addEventListener('click', (e) => {
+  numPlayers = e.target.innerText;
+  game.init();
+})

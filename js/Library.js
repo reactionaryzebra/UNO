@@ -44,9 +44,9 @@ const buildLibrary = () => {
     }
     library.push(card, card, card, card)
   }
-  //Give all cards unique ID
+  //Give all cards unique ID // BUG: identical IDs for duplicate cards
   for (let i = 0; i < library.length; i++) {
-    library[i].id = i      
+    library[i].id = i
   }
   return library
 }
