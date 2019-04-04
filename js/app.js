@@ -41,8 +41,6 @@ const startGame = (namesArr) => {
   startTurn()
 }
 
-
-
 const startTurn = () => {
   checkLegal(game.activePlayer.hand)
   if (!legalPlay) {
@@ -99,3 +97,9 @@ const checkForUno = (players) => {
     }
   })
 }
+
+selectNumPlayers.addEventListener('click', e => {
+  numPlayers = e.target.innerText
+  selectNumPlayers.classList.toggle('visible')
+  selectHumanPlayers.classList.toggle('visible')
+})
