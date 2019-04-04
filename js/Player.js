@@ -5,7 +5,7 @@ class Player {
     this.hand = [];
     this.hasUno = false;
   }
-  play(){
-    
+  play(card){
+        
   }
 }

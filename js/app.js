@@ -48,7 +48,9 @@ const game = {
 
 const deal = (player, numCards) => {
   for (let i = 0; i < numCards; i++) {
-    player.hand.push(deck.cards.pop())
+    let cardToAdd = deck.cards.pop()
+    cardToAdd.handPosition = player.hand.length
+    player.hand.push(cardToAdd)
   }
 }
 
@@ -57,6 +59,14 @@ const checkLegal = (cardsInHand) => {
     if ((card.color === game.activeCard.color) || (card.value === game.activeCard.value) || (card.color === 'black')){
       card.isLegal = true;
       legalPlay = true;
+    }
+  })
+}
+
+const checkForUno = (players) => {
+  players.forEach(player => {
+    if (player.hand.length === 1) {
+      player.hasUno = true;
     }
   })
 }

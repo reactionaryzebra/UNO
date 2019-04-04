@@ -27,7 +27,8 @@ const buildLibrary = () => {
     for (let j = 0; j < values.length; j++) {
       const card = {
         color: colors[i],
-        value: values[j]
+        value: values[j],
+        isLegal: false,
       }
       library.push(card)
       if (j > 0){
@@ -42,6 +43,10 @@ const buildLibrary = () => {
       value: specialValues[i]
     }
     library.push(card, card, card, card)
+  }
+  //Give all cards unique ID
+  for (let i = 0; i < library.length; i++) {
+    library[i].id = i      
   }
   return library
 }
