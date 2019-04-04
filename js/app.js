@@ -5,16 +5,6 @@ let legalPlay = false;
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
 
-
-const shuffle = (array) => {
-  for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-  }
-}
-
 const startGame = (namesArr) => {
   //Create new game object
   game = new Game
@@ -28,7 +18,7 @@ const startGame = (namesArr) => {
       game.players.push(newHumanPlayer)
     }
   })
-  //Roll die to see who goes first
+  //Set random play order
   shuffle(game.players)
   //Make ^^ person active player
   game.activePlayer = game.players[0]
@@ -43,6 +33,15 @@ const startGame = (namesArr) => {
   //Flip a card
   game.cardsInPlay.unshift(deck.cards.pop())
   game.activeCard = game.cardsInPlay[0]
+}
+
+const shuffle = (array) => {
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
 }
 
 const deal = (player, numCards) => {
