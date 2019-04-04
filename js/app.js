@@ -1,5 +1,6 @@
 let deck;
 let numPlayers;
+let legalPlay = false;
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
 
@@ -49,4 +50,13 @@ const deal = (player, numCards) => {
   for (let i = 0; i < numCards; i++) {
     player.hand.push(deck.cards.pop())
   }
+}
+
+const checkLegal = (cardsInHand) => {
+  cardsInHand.forEach(card => {
+    if ((card.color === game.activeCard.color) || (card.value === game.activeCard.value) || (card.color === 'black')){
+      card.isLegal = true;
+      legalPlay = true;
+    }
+  })
 }
