@@ -3,8 +3,12 @@ let game;
 let numPlayers;
 let legalPlay = false;
 let needToDraw = false;
+const modal = document.querySelector('.modal')
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
+const turnScreen = document.getElementById('turn-screen')
+const turnMessage = document.getElementById('turn-message')
+const readyButton = document.querySelector('.ready')
 
 const startGame = (namesArr) => {
   //Create new game object
@@ -37,8 +41,8 @@ const startGame = (namesArr) => {
   //Flip a card
   game.cardsInPlay.unshift(deck.cards.pop())
   game.activeCard = game.cardsInPlay[0]
-  //Start first player's turn
-  startTurn()
+  //Show turn screen
+  renderTurnScreen()
 }
 
 const startTurn = () => {
@@ -98,6 +102,11 @@ const checkForUno = (players) => {
   })
 }
 
+const renderTurnScreen = () => {
+  turnScreen.classList.toggle('visible')
+  turnMessage.innerText = `It's ${game.activePlayer.name}'s turn.  Everyone else avert your eyes'`
+}
+
 selectNumPlayers.addEventListener('click', e => {
   numPlayers = e.target.innerText
   selectNumPlayers.classList.toggle('visible')
@@ -112,4 +121,10 @@ selectHumanPlayers.addEventListener('submit', e => {
   }
   selectHumanPlayers.classList.toggle('visible')
   startGame(inputNames)
+})
+
+readyButton.addEventListener('click', e => {
+  turnScreen.classList.toggle('visible')
+  modal.classList.toggle('visible')
+  startTurn()
 })
