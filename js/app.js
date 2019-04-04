@@ -153,3 +153,13 @@ activePlayerHand.addEventListener('click', e => {
     game.activePlayer.play(game.activePlayer.hand[e.target.dataset.handposition])
   }
 })
+
+deckDiv.addEventListener('click', e => {
+  if (!legalPlay) {
+    deal(game.activePlayer, 1)
+    checkLegal(game.activePlayer.hand)
+    if (!legalPlay) {
+      endTurn()
+    }
+  }
+})
