@@ -19,8 +19,11 @@ const startGame = (namesArr) => {
       game.players.push(newHumanPlayer)
     }
   })
-  //Set random play order
+  //Set random play order and assign seats
   shuffle(game.players)
+  for (let i = 0; i < game.players.length; i++) {
+    game.players[i].seat = i;
+  }
   //Set active Player
   game.activePlayer = game.players[0]
   //Create a new deck
@@ -43,7 +46,7 @@ const startTurn = () => {
   if (!legalPlay) {
     needToDraw = true;
   }
-  renderTable();
+  // renderTable();
 }
 
 const endTurn = () => {
@@ -52,9 +55,13 @@ const endTurn = () => {
 }
 
 const checkForWinner = () => {
-  if (activePlayer.hand.length === 0){
+  if (game.activePlayer.hand.length === 0){
     showWinnerScreen()
   }
+}
+
+const switchPlayer = () => {
+  game.activePlayer = (game.players[game.activePlayer.seat + 1] || game.players[0])
 }
 
 const shuffle = (array) => {
