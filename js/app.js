@@ -1,4 +1,7 @@
 let deck;
+let numPlayers;
+const selectNumPlayers = document.getElementById('select-number-players')
+const selectHumanPlayers = document.getElementById('select-human-players')
 
 const game = {
   players: [],
@@ -9,6 +12,13 @@ const game = {
   init(){
     //Display graphic to allow User to select # players
     //Display graphic to allow User to slect # computer players
+    selectHumanPlayers.classList.toggle('visible')
+    if (numPlayers === 4){
+      document.getElementById('player-3-selector').classList.toggle('visible')
+      document.getElementById('player-4-selector').classList.toggle('visible')
+    } else if (numPlayers === 3){
+      document.getElementById('player-3-selector').classList.toggle('visible')
+    }
     //Display graphic to ask User their name
     //Set players array to players based on previous input
     //Display graphic to roll die to select seats
