@@ -46,7 +46,7 @@ const startTurn = () => {
   if (!legalPlay) {
     needToDraw = true;
   }
-  renderTable();
+  // renderTable();
 }
 
 const endTurn = () => {
@@ -102,4 +102,14 @@ selectNumPlayers.addEventListener('click', e => {
   numPlayers = e.target.innerText
   selectNumPlayers.classList.toggle('visible')
   selectHumanPlayers.classList.toggle('visible')
+})
+
+selectHumanPlayers.addEventListener('submit', e => {
+  e.preventDefault()
+  let inputNames = []
+  for (let i = 0; i < numPlayers; i++) {
+    inputNames.push(e.target.elements[i].value)
+  }
+  selectHumanPlayers.classList.toggle('visible')
+  startGame(inputNames)
 })
