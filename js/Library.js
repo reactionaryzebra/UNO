@@ -28,21 +28,28 @@ const buildLibrary = () => {
       const card = {
         color: colors[i],
         value: values[j],
-        isLegal: false,
+        isLegal: false
       }
       library.push(card)
       if (j > 0){
-        library.push(card)
+        const duplicateCard = {
+          color: colors[i],
+          value: values[j],
+          isLegal: false
+        }
+        library.push(duplicateCard)
       }
     }
   }
   //Make special ('black') cards
   for (let i = 0; i < specialValues.length; i++) {
-    const card = {
-      color: 'black',
-      value: specialValues[i]
+    for (let j = 0; j < 4; j++) {
+      const card = {
+        color: 'black',
+        value: specialValues[i]
+      }
+      library.push(card)    
     }
-    library.push(card, card, card, card)
   }
   //Give all cards unique ID // BUG: identical IDs for duplicate cards
   for (let i = 0; i < library.length; i++) {
