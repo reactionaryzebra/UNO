@@ -1,7 +1,7 @@
-let deck;
-let game;
-let numPlayers;
-let legalPlay = false;
+let deck
+let game
+let numPlayers
+let legalPlay = false
 const modal = document.querySelector('.modal')
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
@@ -17,7 +17,7 @@ const startGame = (namesArr) => {
   game = new Game
   //Create the requisite number of players
   namesArr.forEach(name => {
-    if (name === 'HAL9000'){
+    if (name === 'HAL9000') {
       const newComputerPlayer = new ComputerPlayer
       game.players.push(newComputerPlayer)
     } else {
@@ -48,8 +48,13 @@ const startGame = (namesArr) => {
 }
 
 const startTurn = () => {
+  if (game.activeCard.value === 'draw2'){
+    deal(game.activePlayer, 2)
+  } else if (game.activeCard.value === 'wild4') {
+    deal(game.activePlayer, 4)
+  }
   checkLegal(game.activePlayer.hand)
-  renderTable();
+  renderTable()
 }
 
 const endTurn = () => {
@@ -62,24 +67,24 @@ const endTurn = () => {
 }
 
 const checkForWinner = () => {
-  if (game.activePlayer.hand.length === 0){
+  if (game.activePlayer.hand.length === 0) {
     renderWinnerScreen()
   }
 }
 
 const switchPlayer = () => {
-  let nextPlayerIndex;
+  let nextPlayerIndex
   if (game.activeCard.value === 'skip') {
     nextPlayerIndex = game.activePlayer.seat + 2
     //Handle the case if play needs to wrap around the array
-    if (nextPlayerIndex  >= game.players.length){
+    if (nextPlayerIndex >= game.players.length) {
       nextPlayerIndex = nextPlayerIndex - game.players.length
     }
     game.activePlayer = game.players[nextPlayerIndex]
-  } else if (game.activeCard.value === 'reverse'){
-    if (game.players.length !== 2){
+  } else if (game.activeCard.value === 'reverse') {
+    if (game.players.length !== 2) {
       nextPlayerIndex = game.activePlayer.seat - 1
-      if (nextPlayerIndex < 0){
+      if (nextPlayerIndex < 0) {
         game.activePlayer = game.players[game.players.length - 1]
       } else {
         game.activePlayer = game.players[nextPlayerIndex]
@@ -93,10 +98,10 @@ const switchPlayer = () => {
 
 const shuffle = (array) => {
   for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+    var j = Math.floor(Math.random() * (i + 1))
+    var temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
   }
 }
 
@@ -110,11 +115,11 @@ const deal = (player, numCards) => {
 
 const checkLegal = (cardsInHand) => {
   cardsInHand.forEach(card => {
-    if ((card.color === game.activeCard.color) || (card.value === game.activeCard.value) || (card.color === 'black')){
-      card.isLegal = true;
-      legalPlay = true;
+    if ((card.color === game.activeCard.color) || (card.value === game.activeCard.value) || (card.color === 'black')) {
+      card.isLegal = true
+      legalPlay = true
     } else {
-      card.isLegal = false;
+      card.isLegal = false
     }
   })
 }
@@ -122,7 +127,7 @@ const checkLegal = (cardsInHand) => {
 const checkForUno = (players) => {
   players.forEach(player => {
     if (player.hand.length === 1) {
-      player.hasUno = true;
+      player.hasUno = true
     }
   })
 }
@@ -168,7 +173,7 @@ readyButton.addEventListener('click', e => {
 })
 
 activePlayerHand.addEventListener('click', e => {
-  if (game.activePlayer.hand[e.target.dataset.handposition].isLegal === true){
+  if (game.activePlayer.hand[e.target.dataset.handposition].isLegal === true) {
     game.activePlayer.play(game.activePlayer.hand[e.target.dataset.handposition])
   }
 })
