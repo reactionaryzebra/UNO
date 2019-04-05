@@ -13,6 +13,8 @@ const activePlayerHand = document.querySelector('.active-player')
 const deckDiv = document.querySelector('.deck')
 const cardsInPlayDiv = document.querySelector('.cards-in-play')
 const wildSelection = document.querySelector('#wild-selection')
+const winnerScreen = document.querySelector('#winner-screen')
+const winnerMessage = document.querySelector('#winner-message')
 
 //Game Operation Functions
 
@@ -139,6 +141,11 @@ const checkForUno = (players) => {
 }
 
 //Render Functions
+
+const renderWinnerScreen = () => {
+  modal.classList.toggle('visible')
+  winnerMessage.innerText = `Congratulations to ${game.activePlayer}! You're the winner`
+}
 
 const renderWildSelection = () => {
   modal.classList.toggle('visible')
