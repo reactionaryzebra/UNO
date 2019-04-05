@@ -7,6 +7,7 @@ class Player {
     this.hasUno = false;
   }
   play(card){
+    lastTurnDraw = false;
     this.hand.splice(card.handPosition, 1)
     card.handPosition = null
     card.isLegal = false
@@ -18,6 +19,6 @@ class Player {
       renderWildSelection()
     } else {
       endTurn()
-    }    
+    }
   }
 }

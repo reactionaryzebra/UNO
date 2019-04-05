@@ -2,6 +2,7 @@ let deck
 let game
 let numPlayers
 let legalPlay = false
+let lastTurnDraw = false
 const modal = document.querySelector('.modal')
 const selectNumPlayers = document.querySelector('#select-number-players')
 const selectHumanPlayers = document.querySelector('#select-human-players')
@@ -12,6 +13,8 @@ const activePlayerHand = document.querySelector('.active-player')
 const deckDiv = document.querySelector('.deck')
 const cardsInPlayDiv = document.querySelector('.cards-in-play')
 const wildSelection = document.querySelector('#wild-selection')
+
+//Game Operation Functions
 
 const startGame = (namesArr) => {
   //Create new game object
@@ -67,22 +70,16 @@ const endTurn = () => {
   renderTurnScreen()
 }
 
-const checkForWinner = () => {
-  if (game.activePlayer.hand.length === 0) {
-    renderWinnerScreen()
-  }
-}
-
 const switchPlayer = () => {
   let nextPlayerIndex
-  if (game.activeCard.value === 'skip') {
+  if ((!lastTurnDraw) && (game.activeCard.value === 'skip')) {
     nextPlayerIndex = game.activePlayer.seat + 2
     //Handle the case if play needs to wrap around the array
     if (nextPlayerIndex >= game.players.length) {
       nextPlayerIndex = nextPlayerIndex - game.players.length
     }
     game.activePlayer = game.players[nextPlayerIndex]
-  } else if (game.activeCard.value === 'reverse') {
+  } else if ((!lastTurnDraw) && (game.activeCard.value === 'reverse')) {
     if (game.players.length !== 2) {
       nextPlayerIndex = game.activePlayer.seat - 1
       if (nextPlayerIndex < 0) {
@@ -114,6 +111,14 @@ const deal = (player, numCards) => {
   }
 }
 
+//Check Functions
+
+const checkForWinner = () => {
+  if (game.activePlayer.hand.length === 0) {
+    renderWinnerScreen()
+  }
+}
+
 const checkLegal = (cardsInHand) => {
   cardsInHand.forEach(card => {
     if ((card.color === game.activeCard.color) || (card.value === game.activeCard.value) || (card.color === 'black')) {
@@ -132,6 +137,8 @@ const checkForUno = (players) => {
     }
   })
 }
+
+//Render Functions
 
 const renderWildSelection = () => {
   modal.classList.toggle('visible')
@@ -158,6 +165,8 @@ const renderTable = () => {
   deckDiv.style.backgroundImage = `url(images/large/back.png)`
   cardsInPlayDiv.style.backgroundImage = `url(images/large/${game.activeCard.color}_${game.activeCard.value}.png)`
 }
+
+//Event listeners
 
 selectNumPlayers.addEventListener('click', e => {
   numPlayers = e.target.innerText
@@ -190,6 +199,7 @@ activePlayerHand.addEventListener('click', e => {
 deckDiv.addEventListener('click', e => {
   if (!legalPlay) {
     deal(game.activePlayer, 1)
+    lastTurnDraw = true;
     checkLegal(game.activePlayer.hand)
     if (!legalPlay) {
       endTurn()
