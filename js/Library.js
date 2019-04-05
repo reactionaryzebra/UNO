@@ -11,7 +11,7 @@ class Library {
 
 const buildLibrary = () => {
   const library = [];
-  const values = [0,1,2,3,4,5,6,7,8,9,'skip','reverse','draw2']
+  const values = ['0','1','2','3','4','5','6','7','8','9','skip','reverse','draw2']
   const colors = ['red', 'blue', 'yellow', 'green']
   const specialValues = ['wild', 'wild4']
   //Make colored cards
