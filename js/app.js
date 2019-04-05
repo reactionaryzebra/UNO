@@ -68,7 +68,21 @@ const checkForWinner = () => {
 }
 
 const switchPlayer = () => {
-  game.activePlayer = (game.players[game.activePlayer.seat + 1] || game.players[0])
+  let nextPlayerIndex;
+  if (game.activeCard.value === 'skip') {
+    nextPlayerIndex = game.activePlayer.seat + 2
+    //Handle the case if play needs to wrap around the array
+    if (nextPlayerIndex  >= game.players.length){
+      nextPlayerIndex = nextPlayerIndex - game.players.length
+    }
+    game.activePlayer = game.players[nextPlayerIndex]
+  } else if (game.activeCard.value === 'reverse'){
+    nextPlayerIndex = game.activePlayer.seat - 1
+    game.activePlayer = ((game.players[nextPlayerIndex]) || (game.players[game.players.length -1]))
+  } else {
+    nextPlayerIndex = game.activePlayer.seat + 1
+    game.activePlayer = (game.players[nextPlayerIndex] || game.players[0])
+  }
 }
 
 const shuffle = (array) => {
