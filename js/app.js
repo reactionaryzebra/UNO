@@ -144,7 +144,8 @@ const checkForUno = (players) => {
 
 const renderWinnerScreen = () => {
   modal.classList.toggle('visible')
-  winnerMessage.innerText = `Congratulations to ${game.activePlayer}! You're the winner`
+  winnerScreen.classList.toggle('visible')
+  winnerMessage.innerText = `Congratulations to ${game.activePlayer.name}! You're the winner`
 }
 
 const renderWildSelection = () => {
@@ -206,9 +207,9 @@ activePlayerHand.addEventListener('click', e => {
 deckDiv.addEventListener('click', e => {
   if (!legalPlay) {
     deal(game.activePlayer, 1)
-    renderTable()
     lastTurnDraw = true;
     checkLegal(game.activePlayer.hand)
+    renderTable()
     if (!legalPlay) {
       endTurn()
     }
