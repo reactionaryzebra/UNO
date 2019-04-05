@@ -149,6 +149,9 @@ const renderTable = () => {
     const cardDiv = document.createElement('div')
     cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
     cardDiv.classList.add('card')
+    if (card.isLegal) {
+      cardDiv.classList.toggle('legal')
+    }
     cardDiv.setAttribute('data-handposition', card.handPosition)
     activePlayerHand.appendChild(cardDiv)
   })
