@@ -15,6 +15,7 @@ const cardsInPlayDiv = document.querySelector('.cards-in-play')
 const wildSelection = document.querySelector('#wild-selection')
 const winnerScreen = document.querySelector('#winner-screen')
 const winnerMessage = document.querySelector('#winner-message')
+const opponentHandDiv = document.querySelector('.opponent-hand')
 
 //Game Operation Functions
 
@@ -158,6 +159,20 @@ const renderTurnScreen = () => {
 }
 
 const renderTable = () => {
+  //Display inactive players' hands
+  opponentHandDiv.innerHTML = ''
+  game.players.forEach(player => {
+    if (player.name != game.activePlayer.name) {
+      player.hand.forEach(card => {
+        const opponentCardDiv = document.createElement('div')
+        opponentCardDiv.style.backgroundImage = `url(images/back.png)`
+        opponentCardDiv.classList.add('card')
+        opponentHandDiv.appendChild(opponentCardDiv)
+      })
+    }
+  })
+
+  //Display active Player's hand
   activePlayerHand.innerHTML = ''
   game.activePlayer.hand.forEach(card => {
     const cardDiv = document.createElement('div')
@@ -169,6 +184,8 @@ const renderTable = () => {
     cardDiv.setAttribute('data-handposition', card.handPosition)
     activePlayerHand.appendChild(cardDiv)
   })
+
+  //Display deck and active cards
   deckDiv.style.backgroundImage = `url(images/large/back.png)`
   cardsInPlayDiv.style.backgroundImage = `url(images/large/${game.activeCard.color}_${game.activeCard.value}.png)`
 }
