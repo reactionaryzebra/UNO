@@ -77,8 +77,14 @@ const switchPlayer = () => {
     }
     game.activePlayer = game.players[nextPlayerIndex]
   } else if (game.activeCard.value === 'reverse'){
-    nextPlayerIndex = game.activePlayer.seat - 1
-    game.activePlayer = ((game.players[nextPlayerIndex]) || (game.players[game.players.length -1]))
+    if (game.players.length !== 2){
+      nextPlayerIndex = game.activePlayer.seat - 1
+      if (nextPlayerIndex < 0){
+        game.activePlayer = game.players[game.players.length - 1]
+      } else {
+        game.activePlayer = game.players[nextPlayerIndex]
+      }
+    }
   } else {
     nextPlayerIndex = game.activePlayer.seat + 1
     game.activePlayer = (game.players[nextPlayerIndex] || game.players[0])
