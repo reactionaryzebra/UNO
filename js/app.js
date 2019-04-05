@@ -3,10 +3,10 @@ let game
 let numPlayers
 let legalPlay = false
 const modal = document.querySelector('.modal')
-const selectNumPlayers = document.getElementById('select-number-players')
-const selectHumanPlayers = document.getElementById('select-human-players')
-const turnScreen = document.getElementById('turn-screen')
-const turnMessage = document.getElementById('turn-message')
+const selectNumPlayers = document.querySelector('#select-number-players')
+const selectHumanPlayers = document.querySelector('#select-human-players')
+const turnScreen = document.querySelector('#turn-screen')
+const turnMessage = document.querySelector('#turn-message')
 const readyButton = document.querySelector('.ready')
 const activePlayerHand = document.querySelector('.active-player')
 const deckDiv = document.querySelector('.deck')
