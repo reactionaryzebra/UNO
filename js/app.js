@@ -65,10 +65,8 @@ const startTurn = () => {
 
 const endTurn = () => {
   legalPlay = false
-  renderTable()
   checkForWinner()
   switchPlayer()
-  modal.classList.toggle('visible')
   renderTurnScreen()
 }
 
@@ -154,6 +152,7 @@ const renderWildSelection = () => {
 }
 
 const renderTurnScreen = () => {
+  modal.classList.toggle('visible')
   turnScreen.classList.toggle('visible')
   turnMessage.innerText = `It's ${game.activePlayer.name}'s turn.  Everyone else avert your eyes'`
 }
@@ -189,6 +188,7 @@ selectHumanPlayers.addEventListener('submit', e => {
     inputNames.push(e.target.elements[i].value)
   }
   selectHumanPlayers.classList.toggle('visible')
+  modal.classList.toggle('visible')
   startGame(inputNames)
 })
 
