@@ -88,6 +88,7 @@
 .active-player {
   display:flex;
   justify-content: flex-start;
+  align-items: flex-end;
   overflow: visible
 }
 
@@ -97,6 +98,28 @@
   height: 100%;
 }
 
+.card:hover {
+  width:20%;
+  height: 110%;
+  background-repeat: no-repeat;
+}
+
 .legal {
   box-shadow: -5px -5px 10px 4px gold
+}
+
+#wild-green {
+  background-color: rgb(0, 238, 157)
+}
+
+#wild-yellow {
+  background-color: rgb(246, 232, 75)
+}
+
+#wild-red {
+  background-color: rgb(255, 72, 87)
+}
+
+#wild-blue {
+  background-color: rgb(0, 199, 233)
 }
