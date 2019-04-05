@@ -209,5 +209,7 @@ deckDiv.addEventListener('click', e => {
 
 wildSelection.addEventListener('click', e => {
   game.activeCard.color = e.target.innerHTML.toLowerCase()
+  modal.classList.toggle('visible')
+  wildSelection.classList.toggle('visible')
   endTurn()
 })
