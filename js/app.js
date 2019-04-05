@@ -2,7 +2,6 @@ let deck;
 let game;
 let numPlayers;
 let legalPlay = false;
-let needToDraw = false;
 const modal = document.querySelector('.modal')
 const selectNumPlayers = document.getElementById('select-number-players')
 const selectHumanPlayers = document.getElementById('select-human-players')
@@ -50,13 +49,11 @@ const startGame = (namesArr) => {
 
 const startTurn = () => {
   checkLegal(game.activePlayer.hand)
-  if (!legalPlay) {
-    needToDraw = true;
-  }
   renderTable();
 }
 
 const endTurn = () => {
+  legalPlay = false
   renderTable()
   checkForWinner()
   switchPlayer()
@@ -96,6 +93,8 @@ const checkLegal = (cardsInHand) => {
     if ((card.color === game.activeCard.color) || (card.value === game.activeCard.value) || (card.color === 'black')){
       card.isLegal = true;
       legalPlay = true;
+    } else {
+      card.isLegal = false;
     }
   })
 }
