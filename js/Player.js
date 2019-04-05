@@ -14,6 +14,10 @@ class Player {
     for (let i = 0; i < this.hand.length; i++) {
       this.hand[i].handPosition = i
     };
-    endTurn()
+    if (card.value.includes('wild')){
+      renderWildSelection()
+    } else {
+      endTurn()
+    }    
   }
 }

@@ -11,6 +11,7 @@ const readyButton = document.querySelector('.ready')
 const activePlayerHand = document.querySelector('.active-player')
 const deckDiv = document.querySelector('.deck')
 const cardsInPlayDiv = document.querySelector('.cards-in-play')
+const wildSelection = document.querySelector('#wild-selection')
 
 const startGame = (namesArr) => {
   //Create new game object
@@ -130,6 +131,11 @@ const checkForUno = (players) => {
       player.hasUno = true
     }
   })
+}
+
+const renderWildSelection = () => {
+  modal.classList.toggle('visible')
+  wildSelection.classList.toggle('visible')
 }
 
 const renderTurnScreen = () => {
