@@ -199,6 +199,7 @@ activePlayerHand.addEventListener('click', e => {
 deckDiv.addEventListener('click', e => {
   if (!legalPlay) {
     deal(game.activePlayer, 1)
+    renderTable()
     lastTurnDraw = true;
     checkLegal(game.activePlayer.hand)
     if (!legalPlay) {
