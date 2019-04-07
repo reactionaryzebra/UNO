@@ -187,6 +187,9 @@ const renderTable = () => {
 
   //Display deck and active cards
   deckDiv.style.backgroundImage = `url(images/large/back.png)`
+  if (!legalPlay) {
+    deckDiv.classList.toggle('legal')
+  }
   cardsInPlayDiv.style.backgroundImage = `url(images/large/${game.activeCard.color}_${game.activeCard.value}.png)`
 }
 
@@ -226,6 +229,7 @@ deckDiv.addEventListener('click', e => {
     deal(game.activePlayer, 1)
     lastTurnDraw = true;
     checkLegal(game.activePlayer.hand)
+    deckDiv.classList.toggle('legal')
     renderTable()
     if (!legalPlay) {
       endTurn()
