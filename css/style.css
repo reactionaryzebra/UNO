@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,17 +8,29 @@ body {
   font-family: Nunito, sans-serif
 }
 
+.container {
+  background-image: linear-gradient(to top, #005AA7, #FFFDE4);
+}
+
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Black w/ opacity */
 }
 
 .modal-content {
@@ -27,10 +39,12 @@ body {
   align-items: center;
   background-color: #fefefe;
   clip-path: polygon(25% 0, 100% 0, 100% 66%, 75% 100%, 0 100%, 0 33%);
-  margin: 8% auto; /* 15% from the top and centered */
+  margin: 8% auto;
+  /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 60%; /* Could be more or less, depending on screen size */
+  width: 60%;
+  /* Could be more or less, depending on screen size */
   height: 60%;
 }
 
@@ -45,7 +59,7 @@ body {
 }
 
 .play-room, .left, .right, .middle, .hand, .table {
-  display:flex;
+  display: flex;
 }
 
 .play-room {
@@ -65,7 +79,7 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  width: 60%;
+  width: 76%;
 }
 
 .left .hand, .right .hand {
@@ -75,41 +89,47 @@ body {
 }
 
 .middle .hand {
-  background-color: pink;
-  height: 22%;
+  display:flex;
   width: 100%;
+  justify-content: center;
 }
 
 .table {
-  background-color: green;
-  height: 44%;
-  width: 65%;
+  background-image: url(../images/Table.jpg);
+  height: 50%;
+  width: 75%;
+  border-radius: 2%/4%;
   justify-content: space-around;
   align-items: center;
 }
 
 .cards-in-play, .deck {
-  height: 88%;
-  width: 30%;
+  height: 182px;
+  width: 130px;
   background-size: contain;
+  box-shadow: 4px 4px 2px 0px #e6e6e6;
+  border-radius: 5px;
 }
 
 .active-player {
-  display:flex;
-  justify-content: flex-start;
+  height: 22%;
+  display: flex;
   align-items: flex-end;
 }
 
+.opponent-hand {
+  height: 12%;
+}
+
 .card {
-  width: 130px;
+  max-width: 130px;
   height: 100%;
-  background-size: cover;
+  border-radius: 5px;
+  flex-grow: 1;
 }
 
 .card:hover {
-  width:20%;
-  height: 110%;
-  background-size: cover;
+  flex-grow: 2;
 }
 
 .legal {
