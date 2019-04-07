@@ -24,13 +24,8 @@ const startGame = (namesArr) => {
   game = new Game
   //Create the requisite number of players
   namesArr.forEach(name => {
-    if (name === 'HAL9000') {
-      const newComputerPlayer = new ComputerPlayer
-      game.players.push(newComputerPlayer)
-    } else {
-      const newHumanPlayer = new Player(name)
-      game.players.push(newHumanPlayer)
-    }
+    const newHumanPlayer = new Player(name)
+    game.players.push(newHumanPlayer)
   })
   //Set random play order and assign seats
   shuffle(game.players)
