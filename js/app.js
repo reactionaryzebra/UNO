@@ -16,6 +16,7 @@ const wildSelection = document.querySelector('#wild-selection')
 const winnerScreen = document.querySelector('#winner-screen')
 const winnerMessage = document.querySelector('#winner-message')
 const opponentHandDiv = document.querySelector('.opponent-hand')
+const thankYouScreen = document.querySelector('#thank-you-screen')
 
 //Game Operation Functions
 
@@ -237,4 +238,14 @@ wildSelection.addEventListener('click', e => {
   modal.classList.toggle('visible')
   wildSelection.classList.toggle('visible')
   endTurn()
+})
+
+winnerScreen.addEventListener('click', e => {
+  if (e.target.innerHTML === 'Yes'){
+    winnerScreen.classList.toggle('visible')
+    selectNumPlayers.classList.toggle('visible')
+  } else {
+    winnerScreen.classList.toggle('visible')
+    thankYouScreen.classList.toggle('visible')
+  }
 })
