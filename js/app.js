@@ -19,13 +19,37 @@ const opponentHandDiv = document.querySelector('.opponent-hand')
 
 //Game Operation Functions
 
+const shuffle = (array) => {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1))
+    var temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+}
+
+const deal = (player, numCards) => {
+  for (let i = 0; i < numCards; i++) {
+    let cardToAdd = deck.cards.pop()
+    cardToAdd.handPosition = player.hand.length
+    player.hand.push(cardToAdd)
+  }
+}
+
+//Game Flow Functions
+
 const startGame = (namesArr) => {
   //Create new game object
   game = new Game
   //Create the requisite number of players
   namesArr.forEach(name => {
-    const newHumanPlayer = new Player(name)
-    game.players.push(newHumanPlayer)
+    if (name === 'HAL9000'){
+      const newComputerPlayer = new ComputerPlayer
+      game.players.push(newComputerPlayer)
+    } else {
+      const newHumanPlayer = new Player(name)
+      game.players.push(newHumanPlayer)
+    }
   })
   //Set random play order and assign seats
   shuffle(game.players)
@@ -46,7 +70,11 @@ const startGame = (namesArr) => {
   game.cardsInPlay.unshift(deck.cards.pop())
   game.activeCard = game.cardsInPlay[0]
   //Show turn screen
-  renderTurnScreen()
+  if (!game.players.find(player => player.type === 'computer')){
+    renderTurnScreen()
+  } else {
+    startTurn()
+  }
 }
 
 const startTurn = () => {
@@ -57,13 +85,20 @@ const startTurn = () => {
   }
   checkLegal(game.activePlayer.hand)
   renderTable()
+  if (game.activePlayer.type === 'computer'){
+    game.activePlayer.play();
+  }
 }
 
 const endTurn = () => {
   legalPlay = false
   checkForWinner()
   switchPlayer()
-  renderTurnScreen()
+  if (game.activePlayer.type === 'human'){
+    renderTurnScreen()
+  } else {
+    startTurn()
+  }
 }
 
 const switchPlayer = () => {
@@ -87,23 +122,6 @@ const switchPlayer = () => {
   } else {
     nextPlayerIndex = game.activePlayer.seat + 1
     game.activePlayer = (game.players[nextPlayerIndex] || game.players[0])
-  }
-}
-
-const shuffle = (array) => {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1))
-    var temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
-  }
-}
-
-const deal = (player, numCards) => {
-  for (let i = 0; i < numCards; i++) {
-    let cardToAdd = deck.cards.pop()
-    cardToAdd.handPosition = player.hand.length
-    player.hand.push(cardToAdd)
   }
 }
 
@@ -168,17 +186,19 @@ const renderTable = () => {
   })
 
   //Display active Player's hand
-  activePlayerHand.innerHTML = ''
-  game.activePlayer.hand.forEach(card => {
-    const cardDiv = document.createElement('div')
-    cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
-    cardDiv.classList.add('card')
-    if (card.isLegal) {
-      cardDiv.classList.toggle('legal')
-    }
-    cardDiv.setAttribute('data-handposition', card.handPosition)
-    activePlayerHand.appendChild(cardDiv)
-  })
+  if (game.activePlayer.type === 'human'){
+    activePlayerHand.innerHTML = ''
+    game.activePlayer.hand.forEach(card => {
+      const cardDiv = document.createElement('div')
+      cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
+      cardDiv.classList.add('card')
+      if (card.isLegal) {
+        cardDiv.classList.toggle('legal')
+      }
+      cardDiv.setAttribute('data-handposition', card.handPosition)
+      activePlayerHand.appendChild(cardDiv)
+    })
+  }
 
   //Display deck and active cards
   deckDiv.style.backgroundImage = `url(images/large/back.png)`
