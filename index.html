@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="js/Library.js" defer> </script>
     <script type="text/javascript" src="js/Player.js" defer> </script>
@@ -14,7 +15,7 @@
       <div class="modal visible">
         <div class="modal-content visible" id="select-number-players">
           <h1>Welcome! How many players?</h1>
-          <button type="button" class="number-players">2</button>
+          <button type="button" class="btn number-players">2</button>
           <!-- <button type="button" class="number-players">3</button>
           <button type="button" class="number-players">4</button> -->
         </div>
@@ -35,19 +36,19 @@
               <option value="human">Human</option>
               <option value="computer">Computer</option>
             </select> -->
-            <input type="submit" name="" value="Start Game">
+            <button type="submit" class="btn">Start Game</button>
           </form>
         </div>
         <div class="modal-content" id="turn-screen">
           <h1 id="turn-message"></h1>
-          <button type="button" class="ready">Ready</button>
+          <button type="button" class="btn ready">Ready</button>
         </div>
         <div class="modal-content" id="wild-selection">
           <h1>What color do you choose?</h1>
-          <button type="button" class="wild-color" id="wild-red">Red</button>
-          <button type="button" class="wild-color" id="wild-blue">Blue</button>
-          <button type="button" class="wild-color" id="wild-yellow">Yellow</button>
-          <button type="button" class="wild-color" id="wild-green">Green</button>
+          <button type="button" class="btn wild-color" id="wild-red">Red</button>
+          <button type="button" class="btn wild-color" id="wild-blue">Blue</button>
+          <button type="button" class="btn wild-color" id="wild-yellow">Yellow</button>
+          <button type="button" class="btn wild-color" id="wild-green">Green</button>
         </div>
         <div class="modal-content" id="winner-screen">
           <h1 id="winner-message"></h1>
