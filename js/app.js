@@ -1,11 +1,10 @@
 let deck
 let game
-let numPlayers
 let legalPlay = false
 let lastTurnDraw = false
+let allHuman = true
 const modal = document.querySelector('.modal')
-const selectNumPlayers = document.querySelector('#select-number-players')
-const selectHumanPlayers = document.querySelector('#select-human-players')
+const selectHumanPlayers = document.querySelector('.select-players')
 const turnScreen = document.querySelector('#turn-screen')
 const turnMessage = document.querySelector('#turn-message')
 const readyButton = document.querySelector('.ready')
@@ -16,6 +15,8 @@ const wildSelection = document.querySelector('#wild-selection')
 const winnerScreen = document.querySelector('#winner-screen')
 const winnerMessage = document.querySelector('#winner-message')
 const opponentHandDiv = document.querySelector('.opponent-hand')
+const playerTypeSelect = document.querySelector('.human-or-computer')
+const secondPlayerNameInput = document.querySelector('.second-player-name-input')
 
 //Game Operation Functions
 
@@ -46,6 +47,7 @@ const startGame = (namesArr) => {
     if (name === 'HAL9000'){
       const newComputerPlayer = new ComputerPlayer
       game.players.push(newComputerPlayer)
+      allHuman = false;
     } else {
       const newHumanPlayer = new Player(name)
       game.players.push(newHumanPlayer)
@@ -210,17 +212,21 @@ const renderTable = () => {
 
 //Event listeners
 
-selectNumPlayers.addEventListener('click', e => {
-  numPlayers = e.target.innerText
-  selectNumPlayers.classList.toggle('visible')
-  selectHumanPlayers.classList.toggle('visible')
+playerTypeSelect.addEventListener('change', e => {
+  if (playerTypeSelect.value === 'human') {
+    secondPlayerNameInput.classList.toggle('visible')
+  } else if (playerTypeSelect.value === 'computer') {
+    secondPlayerNameInput.value = 'HAL9000'
+  }
 })
 
 selectHumanPlayers.addEventListener('submit', e => {
   e.preventDefault()
   let inputNames = []
-  for (let i = 0; i < numPlayers; i++) {
-    inputNames.push(e.target.elements[i].value)
+  for (let i = 0; i < e.target.elements.length; i++) {
+    if (e.target.elements[i].tagName === 'INPUT') {
+      inputNames.push(e.target.elements[i].value)
+    }
   }
   selectHumanPlayers.classList.toggle('visible')
   modal.classList.toggle('visible')

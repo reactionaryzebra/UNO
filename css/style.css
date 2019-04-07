@@ -54,6 +54,10 @@ body {
   border-radius: 20%
 }
 
+.second-player-name-input {
+  display: none;
+}
+
 .visible {
   display: flex;
 }
