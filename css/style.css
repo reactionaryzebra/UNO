@@ -56,6 +56,8 @@ body {
   font-family: Nunito, sans-serif
 }
 
+input
+
 .container {
   background-image: linear-gradient(to top, #005AA7, #FFFDE4);
 }
@@ -99,7 +101,14 @@ body {
 
 .select-players {
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+}
+
+.player-form {
+  height: 59%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 span {
@@ -114,7 +123,9 @@ span {
   background-color: rgb(0, 238, 157);
 }
 
-.btn:focus{
+.btn:focus,
+input:focus,
+select:focus{
   outline: 0;
 }
 
@@ -229,6 +240,10 @@ span {
   justify-content: space-around;
 }
 
+#wild-selection {
+  flex-direction: column;
+}
+
 .wild-color {
   flex-basis: 46%;
 }
@@ -247,4 +262,19 @@ span {
 
 #wild-blue {
   background-color: rgb(0, 199, 233)
+}
+
+#winner-screen {
+  flex-direction: column;
+}
+
+.no-btn {
+  background-color: rgb(255, 72, 87)
+}
+
+.input, .select {
+  border: none;
+  border-bottom: 1px solid black;
+  height: 2rem;
+  width: 100%;
 }
