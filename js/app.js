@@ -171,7 +171,11 @@ const checkForUno = (players) => {
 const renderWinnerScreen = () => {
   modal.classList.toggle('visible')
   winnerScreen.classList.toggle('visible')
-  winnerMessage.innerText = `Congratulations to ${game.activePlayer.name}! You're the winner`
+  if (game.activePlayer instanceof ComputerPlayer {
+    winnerMessage.innerText = `The computer has bested you this time`
+  }) else {
+    winnerMessage.innerText = `Congratulations to ${game.activePlayer.name}! You're the winner`
+  }
 }
 
 const renderWildSelection = () => {
