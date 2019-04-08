@@ -96,7 +96,7 @@ const endTurn = () => {
   legalPlay = false
   checkForWinner()
   switchPlayer()
-  if (game.activePlayer.type === 'human'){
+  if (allHuman){
     renderTurnScreen()
   } else {
     startTurn()
@@ -188,7 +188,19 @@ const renderTable = () => {
   })
 
   //Display active Player's hand
-  if (game.activePlayer.type === 'human'){
+  if (!allHuman) {
+    activePlayerHand.innerHTML = ''
+    game.players.find(player => player.type === 'human').hand.forEach(card => {
+      const cardDiv = document.createElement('div')
+      cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
+      cardDiv.classList.add('card')
+      if (card.isLegal) {
+        cardDiv.classList.toggle('legal')
+      }
+      cardDiv.setAttribute('data-handposition', card.handPosition)
+      activePlayerHand.appendChild(cardDiv)
+    })
+  } else {
     activePlayerHand.innerHTML = ''
     game.activePlayer.hand.forEach(card => {
       const cardDiv = document.createElement('div')
