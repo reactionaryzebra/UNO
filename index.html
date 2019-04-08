@@ -14,17 +14,21 @@
     <div class="container">
       <div class="modal visible">
         <div class="modal-content visible select-players">
-          <h1>Welcome! Who will be playing this game?</h1>
+          <h1>Welcome to <span>UNO!</span> Who will be playing this game?</h1>
           <form class="player-form" action="index.html" method="post">
-            <h2>Player 1</h2>
-            <input type="text" name="p1" Placeholder="What is your name?">
-            <h2>Player 2</h2>
-            <select class="human-or-computer">
-              <option>Choose Player Type</option>
-              <option value="human">Human</option>
-              <option value="computer">Computer</option>
-            </select>
-            <input type="text" name="p2" Placeholder="What is your name?" class="second-player-name-input">
+            <div>
+              <h2>Player 1</h2>
+              <input type="text" name="p1" Placeholder="What is your name?">
+            </div>
+            <div>
+              <h2>Player 2</h2>
+              <select class="human-or-computer">
+                <option>Choose Player Type</option>
+                <option value="human">Human</option>
+                <option value="computer">Computer</option>
+              </select>
+              <input type="text" name="p2" Placeholder="What is your name?" class="second-player-name-input">
+            </div>
             <button type="submit" class="btn">Start Game</button>
           </form>
         </div>
