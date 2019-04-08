@@ -1,8 +1,9 @@
 let deck
 let game
 let numPlayers
-let legalPlay = false
-let lastTurnDraw = false
+let legalPlay
+let lastTurnDraw
+let gameOver
 const modal = document.querySelector('.modal')
 const selectNumPlayers = document.querySelector('#select-number-players')
 const selectHumanPlayers = document.querySelector('#select-human-players')
@@ -21,6 +22,10 @@ const thankYouScreen = document.querySelector('#thank-you-screen')
 //Game Operation Functions
 
 const startGame = (namesArr) => {
+  //initialize variables
+  gameOver = false
+  legalPlay = false
+  lastTurnDraw = false
   //Create new game object
   game = new Game
   //Create the requisite number of players
@@ -64,8 +69,10 @@ const startTurn = () => {
 const endTurn = () => {
   legalPlay = false
   checkForWinner()
-  switchPlayer()
-  renderTurnScreen()
+  if (!gameOver){
+    switchPlayer()
+    renderTurnScreen()    
+  }
 }
 
 const switchPlayer = () => {
@@ -114,6 +121,7 @@ const deal = (player, numCards) => {
 const checkForWinner = () => {
   if (game.activePlayer.hand.length === 0) {
     renderWinnerScreen()
+    gameOver = true;
   }
 }
 
