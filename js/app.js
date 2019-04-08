@@ -58,6 +58,7 @@ const startTurn = () => {
   }
   checkLegal(game.activePlayer.hand)
   renderTable()
+  renderHand()
 }
 
 const endTurn = () => {
@@ -168,6 +169,15 @@ const renderTable = () => {
     }
   })
 
+  //Display deck and active cards
+  deckDiv.style.backgroundImage = `url(images/large/back.png)`
+  if (!legalPlay) {
+    deckDiv.classList.toggle('legal')
+  }
+  cardsInPlayDiv.style.backgroundImage = `url(images/large/${game.activeCard.color}_${game.activeCard.value}.png)`
+}
+
+const renderHand = () => {
   //Display active Player's hand
   activePlayerHand.innerHTML = ''
   game.activePlayer.hand.forEach(card => {
@@ -180,13 +190,6 @@ const renderTable = () => {
     cardDiv.setAttribute('data-handposition', card.handPosition)
     activePlayerHand.appendChild(cardDiv)
   })
-
-  //Display deck and active cards
-  deckDiv.style.backgroundImage = `url(images/large/back.png)`
-  if (!legalPlay) {
-    deckDiv.classList.toggle('legal')
-  }
-  cardsInPlayDiv.style.backgroundImage = `url(images/large/${game.activeCard.color}_${game.activeCard.value}.png)`
 }
 
 //Event listeners
@@ -226,7 +229,7 @@ deckDiv.addEventListener('click', e => {
     lastTurnDraw = true;
     checkLegal(game.activePlayer.hand)
     deckDiv.classList.toggle('legal')
-    renderTable()
+    renderHand()
     if (!legalPlay) {
       endTurn()
     }
