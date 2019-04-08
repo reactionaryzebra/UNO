@@ -31,6 +31,7 @@ class ComputerPlayer extends Player {
   }
   play() {
     let cardToPlay
+    let opponentCloseToWin = false
 
     if (!legalPlay) {
       //force draw if no available play
@@ -63,6 +64,24 @@ class ComputerPlayer extends Player {
           legalCards.unshift(tempCard)
         }
       })
+
+      //put draw cards at beginning of array if opponents are low on cards
+      game.players.forEach(player => {
+        if (player != this) {
+          if (player.hand.length < 4) {
+            opponentCloseToWin = true
+          }
+        }
+      })
+      if (opponentCloseToWin){
+        legalCards.forEach((card, index) => {
+          if (card.value.includes('draw')){
+            let tempCard = legalCards[index]
+            legalCards.splice(index, 1)
+            legalCards.unshift(tempCard)
+          }
+        })
+      }
 
       //Assign card to play
       cardToPlay = legalCards[0]
