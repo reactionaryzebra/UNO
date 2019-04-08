@@ -116,6 +116,6 @@ class ComputerPlayer extends Player {
         game.activeCard.color = mostFrequentColor
       }
     }
-    endTurn()
+    setTimeout(endTurn, 3000)
   }
 }
