@@ -4,9 +4,9 @@ let numPlayers
 let legalPlay
 let lastTurnDraw
 let gameOver
+let allHuman
 const modal = document.querySelector('.modal')
-const selectNumPlayers = document.querySelector('#select-number-players')
-const selectHumanPlayers = document.querySelector('#select-human-players')
+const selectHumanPlayers = document.querySelector('.select-players')
 const turnScreen = document.querySelector('#turn-screen')
 const turnMessage = document.querySelector('#turn-message')
 const readyButton = document.querySelector('.ready')
@@ -17,21 +17,49 @@ const wildSelection = document.querySelector('#wild-selection')
 const winnerScreen = document.querySelector('#winner-screen')
 const winnerMessage = document.querySelector('#winner-message')
 const opponentHandDiv = document.querySelector('.opponent-hand')
+const playerTypeSelect = document.querySelector('.human-or-computer')
+const secondPlayerNameInput = document.querySelector('.second-player-name-input')
 const thankYouScreen = document.querySelector('#thank-you-screen')
 
 //Game Operation Functions
+
+const shuffle = (array) => {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1))
+    var temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+}
+
+const deal = (player, numCards) => {
+  for (let i = 0; i < numCards; i++) {
+    let cardToAdd = deck.cards.pop()
+    cardToAdd.handPosition = player.hand.length
+    player.hand.push(cardToAdd)
+  }
+}
+
+//Game Flow Functions
 
 const startGame = (namesArr) => {
   //initialize variables
   gameOver = false
   legalPlay = false
   lastTurnDraw = false
+  allHuman = true
   //Create new game object
   game = new Game
   //Create the requisite number of players
   namesArr.forEach(name => {
-    const newHumanPlayer = new Player(name)
-    game.players.push(newHumanPlayer)
+    if (name === 'HAL9000'){
+      const newComputerPlayer = new ComputerPlayer
+      game.players.push(newComputerPlayer)
+      allHuman = false;
+    } else {
+      const newHumanPlayer = new Player(name)
+      game.players.push(newHumanPlayer)
+    }
   })
   //Set random play order and assign seats
   shuffle(game.players)
@@ -52,7 +80,11 @@ const startGame = (namesArr) => {
   game.cardsInPlay.unshift(deck.cards.pop())
   game.activeCard = game.cardsInPlay[0]
   //Show turn screen
-  renderTurnScreen()
+  if (!game.players.find(player => player.type === 'computer')){
+    renderTurnScreen()
+  } else {
+    startTurn()
+  }
 }
 
 const startTurn = () => {
@@ -64,6 +96,9 @@ const startTurn = () => {
   checkLegal(game.activePlayer.hand)
   renderTable()
   renderHand()
+  if (game.activePlayer.type === 'computer'){
+    game.activePlayer.play();
+  }
 }
 
 const endTurn = () => {
@@ -71,7 +106,11 @@ const endTurn = () => {
   checkForWinner()
   if (!gameOver){
     switchPlayer()
-    renderTurnScreen()    
+    if (allHuman){
+      renderTurnScreen()
+    } else {
+      startTurn()
+    }
   }
 }
 
@@ -96,23 +135,6 @@ const switchPlayer = () => {
   } else {
     nextPlayerIndex = game.activePlayer.seat + 1
     game.activePlayer = (game.players[nextPlayerIndex] || game.players[0])
-  }
-}
-
-const shuffle = (array) => {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1))
-    var temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
-  }
-}
-
-const deal = (player, numCards) => {
-  for (let i = 0; i < numCards; i++) {
-    let cardToAdd = deck.cards.pop()
-    cardToAdd.handPosition = player.hand.length
-    player.hand.push(cardToAdd)
   }
 }
 
@@ -187,32 +209,50 @@ const renderTable = () => {
 
 const renderHand = () => {
   //Display active Player's hand
-  activePlayerHand.innerHTML = ''
-  game.activePlayer.hand.forEach(card => {
-    const cardDiv = document.createElement('div')
-    cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
-    cardDiv.classList.add('card')
-    if (card.isLegal) {
-      cardDiv.classList.toggle('legal')
-    }
-    cardDiv.setAttribute('data-handposition', card.handPosition)
-    activePlayerHand.appendChild(cardDiv)
-  })
+  if (!allHuman) {
+    activePlayerHand.innerHTML = ''
+    game.players.find(player => player.type === 'human').hand.forEach(card => {
+      const cardDiv = document.createElement('div')
+      cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
+      cardDiv.classList.add('card')
+      if (card.isLegal) {
+        cardDiv.classList.toggle('legal')
+      }
+      cardDiv.setAttribute('data-handposition', card.handPosition)
+      activePlayerHand.appendChild(cardDiv)
+    })
+  } else {
+    activePlayerHand.innerHTML = ''
+    game.activePlayer.hand.forEach(card => {
+      const cardDiv = document.createElement('div')
+      cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
+      cardDiv.classList.add('card')
+      if (card.isLegal) {
+        cardDiv.classList.toggle('legal')
+      }
+      cardDiv.setAttribute('data-handposition', card.handPosition)
+      activePlayerHand.appendChild(cardDiv)
+    })
+  }
 }
 
 //Event listeners
 
-selectNumPlayers.addEventListener('click', e => {
-  numPlayers = e.target.innerText
-  selectNumPlayers.classList.toggle('visible')
-  selectHumanPlayers.classList.toggle('visible')
+playerTypeSelect.addEventListener('change', e => {
+  if (playerTypeSelect.value === 'human') {
+    secondPlayerNameInput.classList.toggle('visible')
+  } else if (playerTypeSelect.value === 'computer') {
+    secondPlayerNameInput.value = 'HAL9000'
+  }
 })
 
 selectHumanPlayers.addEventListener('submit', e => {
   e.preventDefault()
   let inputNames = []
-  for (let i = 0; i < numPlayers; i++) {
-    inputNames.push(e.target.elements[i].value)
+  for (let i = 0; i < e.target.elements.length; i++) {
+    if (e.target.elements[i].tagName === 'INPUT') {
+      inputNames.push(e.target.elements[i].value)
+    }
   }
   selectHumanPlayers.classList.toggle('visible')
   modal.classList.toggle('visible')

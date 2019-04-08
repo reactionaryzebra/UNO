@@ -13,29 +13,18 @@
   <body>
     <div class="container">
       <div class="modal visible">
-        <div class="modal-content visible" id="select-number-players">
-          <h1>Welcome! How many players?</h1>
-          <button type="button" class="btn number-players">2</button>
-          <!-- <button type="button" class="number-players">3</button>
-          <button type="button" class="number-players">4</button> -->
-        </div>
-        <div class="modal-content" id="select-human-players">
-          <h1>Who will be playing?</h1>
-          <form class="" action="index.html" method="post">
+        <div class="modal-content visible select-players">
+          <h1>Welcome! Who will be playing this game?</h1>
+          <form class="player-form" action="index.html" method="post">
             <h2>Player 1</h2>
-            <input type="text" name="p2" placeholder="What's your name?">
+            <input type="text" name="p1" Placeholder="What is your name?">
             <h2>Player 2</h2>
-            <input type="text" name="p2" placeholder="What's your name?">
-            <!-- <h2 class="player-3-selector">Player 3</h2>
-            <select class="player-3-selector">
+            <select class="human-or-computer">
+              <option>Choose Player Type</option>
               <option value="human">Human</option>
               <option value="computer">Computer</option>
             </select>
-            <h2 class="player-4-selector">Player 4</h2>
-            <select class="player-4-selector">
-              <option value="human">Human</option>
-              <option value="computer">Computer</option>
-            </select> -->
+            <input type="text" name="p2" Placeholder="What is your name?" class="second-player-name-input">
             <button type="submit" class="btn">Start Game</button>
           </form>
         </div>

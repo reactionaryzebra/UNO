@@ -23,3 +23,39 @@ class Player {
     }
   }
 }
+
+class ComputerPlayer extends Player {
+  constructor() {
+    super('computer player')
+    this.type = 'computer'
+  }
+  play() {
+    if (!legalPlay) {
+      deal(this, 1)
+    } else {
+      const legalCards = []
+      this.hand.forEach(card => {
+        if (card.isLegal){
+          legalCards.push(card)
+        }
+      })
+      const randomCardIndex = Math.floor(Math.random() * legalCards.length)
+      const cardToPlay = legalCards[randomCardIndex]
+      lastTurnDraw = false;
+      this.hand.splice(cardToPlay.handPosition, 1)
+      cardToPlay.handPosition = null
+      cardToPlay.isLegal = false
+      game.cardsInPlay.unshift(cardToPlay)
+      game.activeCard = game.cardsInPlay[0]
+      for (let i = 0; i < this.hand.length; i++) {
+        this.hand[i].handPosition = i
+      };
+      if (cardToPlay.value.includes('wild')){
+        const colors = ['red','blue','green','yellow']
+        const randomColor = colors[Math.floor(Math.random() * 4)]
+        game.activeCard.color = randomColor
+      }
+    }
+    endTurn()
+  }
+}
