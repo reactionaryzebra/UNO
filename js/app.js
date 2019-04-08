@@ -294,7 +294,7 @@ wildSelection.addEventListener('click', e => {
 winnerScreen.addEventListener('click', e => {
   if (e.target.innerHTML === 'Yes'){
     winnerScreen.classList.toggle('visible')
-    selectNumPlayers.classList.toggle('visible')
+    selectHumanPlayers.classList.toggle('visible')
   } else {
     winnerScreen.classList.toggle('visible')
     thankYouScreen.classList.toggle('visible')

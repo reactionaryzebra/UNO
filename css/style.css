@@ -1,3 +1,14 @@
+@keyframes moveInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -34,11 +45,12 @@ body {
 }
 
 .modal-content {
+  animation: moveInTop 1s ease-out;
   display: none;
   justify-content: space-around;
   align-items: center;
   background-color: #fefefe;
-  clip-path: polygon(25% 0, 100% 0, 100% 66%, 75% 100%, 0 100%, 0 33%);
+  clip-path: polygon(15% 0, 100% 0, 100% 80%, 85% 100%, 0 100%, 0 20%);
   margin: 8% auto;
   /* 15% from the top and centered */
   padding: 20px;
@@ -50,8 +62,9 @@ body {
 
 .btn {
   font-size: 2rem;
-  padding: 2rem;
-  border-radius: 20%
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 20%;
 }
 
 .second-player-name-input {
@@ -108,9 +121,11 @@ body {
 }
 
 .cards-in-play, .deck {
-  height: 182px;
-  width: 130px;
-  background-size: contain;
+  max-height: 182px;
+  max-width: 130px;
+  height: 80%;
+  width: 30%;
+  background-size: cover;
   box-shadow: 4px 4px 2px 0px #e6e6e6;
   border-radius: 5px;
 }
@@ -123,6 +138,11 @@ body {
 
 .opponent-hand {
   height: 12%;
+  align-items: flex-end;
+}
+
+.opponent-hand .card {
+  background-position: bottom;
 }
 
 .card {
@@ -130,10 +150,12 @@ body {
   height: 100%;
   border-radius: 5px;
   flex-grow: 1;
+  background-size: cover;
 }
 
-.card:hover {
+.active-player .card:hover {
   flex-grow: 2;
+  height: 110%;
 }
 
 .legal {
