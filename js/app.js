@@ -191,17 +191,31 @@ const renderTurnScreen = () => {
 
 const renderTable = () => {
   //Display inactive players' hands
-  opponentHandDiv.innerHTML = ''
-  game.players.forEach(player => {
-    if (player.name != game.activePlayer.name) {
-      player.hand.forEach(card => {
-        const opponentCardDiv = document.createElement('div')
-        opponentCardDiv.style.backgroundImage = `url(images/back.png)`
-        opponentCardDiv.classList.add('card')
-        opponentHandDiv.appendChild(opponentCardDiv)
-      })
-    }
-  })
+  if (!allHuman) {
+    opponentHandDiv.innerHTML = ''
+    game.players.forEach(player => {
+      if (player.type === 'computer') {
+        player.hand.forEach(card => {
+          const opponentCardDiv = document.createElement('div')
+          opponentCardDiv.style.backgroundImage = `url(images/back.png)`
+          opponentCardDiv.classList.add('card')
+          opponentHandDiv.appendChild(opponentCardDiv)
+        })
+      }
+    })
+  } else {
+    opponentHandDiv.innerHTML = ''
+    game.players.forEach(player => {
+      if (player.name != game.activePlayer.name) {
+        player.hand.forEach(card => {
+          const opponentCardDiv = document.createElement('div')
+          opponentCardDiv.style.backgroundImage = `url(images/back.png)`
+          opponentCardDiv.classList.add('card')
+          opponentHandDiv.appendChild(opponentCardDiv)
+        })
+      }
+    })
+  }
 
   //Display deck and active cards
   deckDiv.style.backgroundImage = `url(images/large/back.png)`

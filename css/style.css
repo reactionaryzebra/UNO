@@ -56,7 +56,9 @@ body {
   font-family: Nunito, sans-serif
 }
 
-input
+h1 {
+  line-height: 2rem;
+}
 
 .container {
   background-image: linear-gradient(to top, #005AA7, #FFFDE4);
@@ -127,6 +129,11 @@ span {
 input:focus,
 select:focus{
   outline: 0;
+  background-color: #fefefe;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 .btn:hover {
@@ -147,8 +154,8 @@ select:focus{
 }
 
 .play-room {
-  height: 98vh;
-  margin: 1vh 2vh;
+  height: 100vh;
+  padding: 1vh;
   justify-content: space-between;
 }
 
@@ -273,6 +280,8 @@ select:focus{
 }
 
 .input, .select {
+  font-family: Nunito, sans-serif;
+  font-size: 1rem;
   border: none;
   border-bottom: 1px solid black;
   height: 2rem;
