@@ -262,12 +262,18 @@ const renderHand = () => {
 }
 
 const renderTurnIndicator = () => {
-  turnIndicatorLabel.classList.toggle('visible')
+  if (!turnIndicatorLabel.classList.contains('visible')){
+    turnIndicatorLabel.classList.toggle('visible')
+  }
   if (game.activePlayer.type === 'computer'){
-    playerTurnIndicator.style.display = 'none'
+    if (playerTurnIndicator.classList.contains('visible')){
+      playerTurnIndicator.classList.toggle('visible')
+    }
     opponentTurnIndicator.classList.toggle('visible')
   } else {
-    opponentTurnIndicator.style.display = 'none'
+    if (opponentTurnIndicator.classList.contains('visible')) {
+      opponentTurnIndicator.classList.toggle('visible')
+    }
     playerTurnIndicator.classList.toggle('visible')
   }
 }
