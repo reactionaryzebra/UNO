@@ -20,6 +20,9 @@ const opponentHandDiv = document.querySelector('.opponent-hand')
 const playerTypeSelect = document.querySelector('.human-or-computer')
 const secondPlayerNameInput = document.querySelector('.second-player-name-input')
 const thankYouScreen = document.querySelector('#thank-you-screen')
+const turnIndicatorLabel = document.querySelector('.turn-indicator-label')
+const opponentTurnIndicator = document.querySelector('.opponent-turn-indicator')
+const playerTurnIndicator = document.querySelector('.player-turn-indicator')
 
 //Game Operation Functions
 
@@ -96,6 +99,9 @@ const startTurn = () => {
   checkLegal(game.activePlayer.hand)
   renderTable()
   renderHand()
+  if (!allHuman) {
+    renderTurnIndicator()
+  }
   if (game.activePlayer.type === 'computer'){
     game.activePlayer.play();
   }
@@ -190,7 +196,8 @@ const renderTurnScreen = () => {
 }
 
 const renderTable = () => {
-  //Display inactive players' hands
+  //Display computer's hand if playing vs comp and inactive players' hands if playing
+  //another human
   if (!allHuman) {
     opponentHandDiv.innerHTML = ''
     game.players.forEach(player => {
@@ -251,6 +258,17 @@ const renderHand = () => {
       cardDiv.setAttribute('data-handposition', card.handPosition)
       activePlayerHand.appendChild(cardDiv)
     })
+  }
+}
+
+const renderTurnIndicator = () => {
+  turnIndicatorLabel.classList.toggle('visible')
+  if (game.activePlayer.type === 'computer'){
+    playerTurnIndicator.style.display = 'none'
+    opponentTurnIndicator.classList.toggle('visible')
+  } else {
+    opponentTurnIndicator.style.display = 'none'
+    playerTurnIndicator.classList.toggle('visible')
   }
 }
 

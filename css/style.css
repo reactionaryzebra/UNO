@@ -147,10 +147,6 @@ input:-webkit-autofill {
   display: none;
 }
 
-.visible {
-  display: flex;
-}
-
 .play-room, .left, .right, .middle, .hand, .table {
   display: flex;
 }
@@ -288,4 +284,37 @@ input:-webkit-autofill {
   border-bottom: 1px solid black;
   height: 2rem;
   width: 100%;
+}
+
+.turn-indicator-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.turn-indicator-label {
+  display: none;
+}
+
+.opponent-turn-indicator {
+  display: none;
+  height: 40%;
+  width: 100%;
+  clip-path: polygon(50% 0, 100% 20%, 80% 20%, 80% 100%, 20% 100%, 20% 20%, 0 20%);
+  background-color: rgb(255, 102, 244);
+}
+
+.player-turn-indicator {
+  display: none;
+  height: 40%;
+  width: 100%;
+  clip-path: polygon(20% 0, 80% 0, 80% 80%, 100% 80%, 50% 100%, 0 80%, 20% 80%);
+  background-color: rgb(255, 102, 244);
+}
+
+.visible {
+  display: flex;
 }
