@@ -225,7 +225,7 @@ const renderTable = () => {
 
   //Display deck and active cards
   deckDiv.style.backgroundImage = `url(images/large/back.png)`
-  if (!legalPlay) {
+  if ((!legalPlay)&&(game.activePlayer.type === 'human')) {
     deckDiv.classList.add('legal')
   } else {
     deckDiv.classList.remove('legal')
@@ -241,7 +241,7 @@ const renderHand = () => {
       const cardDiv = document.createElement('div')
       cardDiv.style.backgroundImage = `url(images/${card.color}_${card.value}.png)`
       cardDiv.classList.add('card')
-      if (card.isLegal) {
+      if ((card.isLegal)&&(game.activePlayer.type === 'human')) {
         cardDiv.classList.toggle('legal')
       }
       cardDiv.setAttribute('data-handposition', card.handPosition)
@@ -316,6 +316,7 @@ deckDiv.addEventListener('click', e => {
     lastTurnDraw = true;
     checkLegal(game.activePlayer.hand)
     renderHand()
+    deckDiv.classList.remove('legal')
     if (!legalPlay) {
       endTurn()
     }
