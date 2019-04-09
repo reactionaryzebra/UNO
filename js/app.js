@@ -1,24 +1,23 @@
 let deck
 let game
-let numPlayers
 let legalPlay
 let lastTurnDraw
 let gameOver
 let allHuman
 const modal = document.querySelector('.modal')
-const selectHumanPlayers = document.querySelector('.select-players')
+const selectPlayers = document.querySelector('.select-players')
+const playerTypeSelect = document.querySelector('.human-or-computer')
+const secondPlayerNameInput = document.querySelector('.second-player-name-input')
 const turnScreen = document.querySelector('#turn-screen')
 const turnMessage = document.querySelector('#turn-message')
-const readyButton = document.querySelector('.ready')
+const turnReadyButton = document.querySelector('.ready')
 const activePlayerHand = document.querySelector('.active-player')
+const opponentHand = document.querySelector('.opponent-hand')
 const deckDiv = document.querySelector('.deck')
 const cardsInPlayDiv = document.querySelector('.cards-in-play')
 const wildSelection = document.querySelector('#wild-selection')
 const winnerScreen = document.querySelector('#winner-screen')
 const winnerMessage = document.querySelector('#winner-message')
-const opponentHandDiv = document.querySelector('.opponent-hand')
-const playerTypeSelect = document.querySelector('.human-or-computer')
-const secondPlayerNameInput = document.querySelector('.second-player-name-input')
 const thankYouScreen = document.querySelector('#thank-you-screen')
 const turnIndicatorLabel = document.querySelector('.turn-indicator-label')
 const opponentTurnIndicator = document.querySelector('.opponent-turn-indicator')
@@ -199,26 +198,26 @@ const renderTable = () => {
   //Display computer's hand if playing vs comp and inactive players' hands if playing
   //another human
   if (!allHuman) {
-    opponentHandDiv.innerHTML = ''
+    opponentHand.innerHTML = ''
     game.players.forEach(player => {
       if (player.type === 'computer') {
         player.hand.forEach(card => {
           const opponentCardDiv = document.createElement('div')
           opponentCardDiv.style.backgroundImage = `url(images/back.png)`
           opponentCardDiv.classList.add('card')
-          opponentHandDiv.appendChild(opponentCardDiv)
+          opponentHand.appendChild(opponentCardDiv)
         })
       }
     })
   } else {
-    opponentHandDiv.innerHTML = ''
+    opponentHand.innerHTML = ''
     game.players.forEach(player => {
       if (player.name != game.activePlayer.name) {
         player.hand.forEach(card => {
           const opponentCardDiv = document.createElement('div')
           opponentCardDiv.style.backgroundImage = `url(images/back.png)`
           opponentCardDiv.classList.add('card')
-          opponentHandDiv.appendChild(opponentCardDiv)
+          opponentHand.appendChild(opponentCardDiv)
         })
       }
     })
@@ -227,7 +226,9 @@ const renderTable = () => {
   //Display deck and active cards
   deckDiv.style.backgroundImage = `url(images/large/back.png)`
   if (!legalPlay) {
-    deckDiv.classList.toggle('legal')
+    deckDiv.classList.add('legal')
+  } else {
+    deckDiv.classList.remove('legal')
   }
   cardsInPlayDiv.style.backgroundImage = `url(images/large/${game.activeCard.color}_${game.activeCard.value}.png)`
 }
@@ -266,15 +267,11 @@ const renderTurnIndicator = () => {
     turnIndicatorLabel.classList.toggle('visible')
   }
   if (game.activePlayer.type === 'computer'){
-    if (playerTurnIndicator.classList.contains('visible')){
-      playerTurnIndicator.classList.toggle('visible')
-    }
-    opponentTurnIndicator.classList.toggle('visible')
+    playerTurnIndicator.style.display = 'none'
+    opponentTurnIndicator.style.display = 'flex'
   } else {
-    if (opponentTurnIndicator.classList.contains('visible')) {
-      opponentTurnIndicator.classList.toggle('visible')
-    }
-    playerTurnIndicator.classList.toggle('visible')
+    playerTurnIndicator.style.display = 'flex'
+    opponentTurnIndicator.style.display = 'none'
   }
 }
 
@@ -288,7 +285,7 @@ playerTypeSelect.addEventListener('change', e => {
   }
 })
 
-selectHumanPlayers.addEventListener('submit', e => {
+selectPlayers.addEventListener('submit', e => {
   e.preventDefault()
   let inputNames = []
   for (let i = 0; i < e.target.elements.length; i++) {
@@ -296,12 +293,12 @@ selectHumanPlayers.addEventListener('submit', e => {
       inputNames.push(e.target.elements[i].value)
     }
   }
-  selectHumanPlayers.classList.toggle('visible')
+  selectPlayers.classList.toggle('visible')
   modal.classList.toggle('visible')
   startGame(inputNames)
 })
 
-readyButton.addEventListener('click', e => {
+turnReadyButton.addEventListener('click', e => {
   turnScreen.classList.toggle('visible')
   modal.classList.toggle('visible')
   startTurn()
@@ -318,7 +315,6 @@ deckDiv.addEventListener('click', e => {
     deal(game.activePlayer, 1)
     lastTurnDraw = true;
     checkLegal(game.activePlayer.hand)
-    deckDiv.classList.toggle('legal')
     renderHand()
     if (!legalPlay) {
       endTurn()
@@ -336,7 +332,7 @@ wildSelection.addEventListener('click', e => {
 winnerScreen.addEventListener('click', e => {
   if (e.target.innerHTML === 'Yes'){
     winnerScreen.classList.toggle('visible')
-    selectHumanPlayers.classList.toggle('visible')
+    selectPlayers.classList.toggle('visible')
   } else {
     winnerScreen.classList.toggle('visible')
     thankYouScreen.classList.toggle('visible')
