@@ -68,7 +68,6 @@
   }
 }
 
-
 * {
   margin: 0;
   padding: 0;
@@ -76,7 +75,7 @@
 }
 
 body {
-  font-family: Nunito, sans-serif
+  font-family: Nunito, sans-serif;
 }
 
 h1 {
@@ -84,8 +83,12 @@ h1 {
 }
 
 .container {
-  background-image: linear-gradient(to top, rgba(0,90,167, .8), rgba(255,253,228.8)),
- url(../images/background.png);
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 90, 167, 0.8),
+      rgba(255, 253, 228.8)
+    ),
+    url(../images/background.png);
   background-size: cover;
 }
 
@@ -145,20 +148,20 @@ span {
 .btn {
   font-size: 2rem;
   padding: 1rem;
-  margin: .5rem;
+  margin: 0.5rem;
   border-radius: 20%;
   background-color: rgb(0, 238, 157);
 }
 
 .btn:focus,
 input:focus,
-select:focus{
+select:focus {
   outline: 0;
   background-color: #fefefe;
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px white inset;
+  -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
 .btn:hover {
@@ -170,7 +173,12 @@ input:-webkit-autofill {
   display: none;
 }
 
-.play-room, .left, .right, .middle, .hand, .table {
+.play-room,
+.left,
+.right,
+.middle,
+.hand,
+.table {
   display: flex;
 }
 
@@ -180,10 +188,32 @@ input:-webkit-autofill {
   justify-content: space-between;
 }
 
-.left, .right {
+.left {
   flex-direction: column;
   justify-content: center;
   width: 10%;
+}
+
+.right {
+  width: 10%;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.rules-btn {
+  background-color: rgb(53, 123, 182);
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(243, 245, 227);
+}
+
+#rules-screen {
+  flex-direction: column;
+  height: 80%;
 }
 
 .middle {
@@ -194,14 +224,15 @@ input:-webkit-autofill {
   width: 76%;
 }
 
-.left .hand, .right .hand {
+.left .hand,
+.right .hand {
   background-color: pink;
   height: 65%;
   width: 100%;
 }
 
 .middle .hand {
-  display:flex;
+  display: flex;
   width: 100%;
   justify-content: center;
 }
@@ -215,7 +246,8 @@ input:-webkit-autofill {
   align-items: center;
 }
 
-.cards-in-play, .deck {
+.cards-in-play,
+.deck {
   max-height: 182px;
   max-width: 130px;
   height: 80%;
@@ -277,19 +309,19 @@ input:-webkit-autofill {
 }
 
 #wild-green {
-  background-color: rgb(0, 238, 157)
+  background-color: rgb(0, 238, 157);
 }
 
 #wild-yellow {
-  background-color: rgb(246, 232, 75)
+  background-color: rgb(246, 232, 75);
 }
 
 #wild-red {
-  background-color: rgb(255, 72, 87)
+  background-color: rgb(255, 72, 87);
 }
 
 #wild-blue {
-  background-color: rgb(0, 199, 233)
+  background-color: rgb(0, 199, 233);
 }
 
 #winner-screen {
@@ -297,10 +329,11 @@ input:-webkit-autofill {
 }
 
 .no-btn {
-  background-color: rgb(255, 72, 87)
+  background-color: rgb(255, 72, 87);
 }
 
-.input, .select {
+.input,
+.select {
   font-family: Nunito, sans-serif;
   font-size: 1rem;
   border: none;
@@ -322,7 +355,8 @@ input:-webkit-autofill {
   display: none;
 }
 
-.opponent-turn-indicator, .player-turn-indicator {
+.opponent-turn-indicator,
+.player-turn-indicator {
   display: none;
   height: 40%;
   width: 100%;
@@ -330,7 +364,15 @@ input:-webkit-autofill {
 }
 
 .opponent-turn-indicator {
-  clip-path: polygon(50% 0, 100% 20%, 80% 20%, 80% 100%, 20% 100%, 20% 20%, 0 20%);
+  clip-path: polygon(
+    50% 0,
+    100% 20%,
+    80% 20%,
+    80% 100%,
+    20% 100%,
+    20% 20%,
+    0 20%
+  );
   animation: scale-up-ver-bottom 1s ease-out;
 }
 

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script type="text/javascript" src="js/Library.js" defer> </script>
-    <script type="text/javascript" src="js/Player.js" defer> </script>
-    <script type="text/javascript" src="js/Game.js" defer> </script>
-    <script type="text/javascript" src="js/app.js" defer> </script>
-    <meta charset="utf-8">
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/Library.js" defer></script>
+    <script type="text/javascript" src="js/Player.js" defer></script>
+    <script type="text/javascript" src="js/Game.js" defer></script>
+    <script type="text/javascript" src="js/app.js" defer></script>
+    <meta charset="utf-8" />
     <title></title>
   </head>
   <body>
@@ -18,7 +21,12 @@
           <form class="player-form" action="index.html" method="post">
             <div>
               <h2>Player 1</h2>
-              <input class="input" type="text" name="p1" Placeholder="What is your name?">
+              <input
+                class="input"
+                type="text"
+                name="p1"
+                placeholder="What is your name?"
+              />
             </div>
             <div>
               <h2>Player 2</h2>
@@ -27,7 +35,12 @@
                 <option value="human">Human</option>
                 <option value="computer">Computer</option>
               </select>
-              <input type="text" name="p2" Placeholder="What is your name?" class="second-player-name-input input">
+              <input
+                type="text"
+                name="p2"
+                placeholder="What is your name?"
+                class="second-player-name-input input"
+              />
             </div>
             <button type="submit" class="btn">Start Game</button>
           </form>
@@ -39,10 +52,18 @@
         <div class="modal-content" id="wild-selection">
           <h1>What color do you choose?</h1>
           <div class="btn-container">
-            <button type="button" class="btn wild-color" id="wild-red">Red</button>
-            <button type="button" class="btn wild-color" id="wild-blue">Blue</button>
-            <button type="button" class="btn wild-color" id="wild-yellow">Yellow</button>
-            <button type="button" class="btn wild-color" id="wild-green">Green</button>
+            <button type="button" class="btn wild-color" id="wild-red">
+              Red
+            </button>
+            <button type="button" class="btn wild-color" id="wild-blue">
+              Blue
+            </button>
+            <button type="button" class="btn wild-color" id="wild-yellow">
+              Yellow
+            </button>
+            <button type="button" class="btn wild-color" id="wild-green">
+              Green
+            </button>
           </div>
         </div>
         <div class="modal-content" id="winner-screen">
@@ -56,10 +77,36 @@
         <div class="modal-content" id="thank-you-screen">
           <h1>Thanks for playing!</h1>
         </div>
+        <div class="modal-content" id="rules-screen">
+          <h1>Rules</h1>
+          <p>
+            The goal of UNO is to play all of the cards in your hand. On each
+            turn you have to play a card from your hand that matches the card in
+            play either in color or number.
+          </p>
+          <p>There are a few special cards:</p>
+          <ul>
+            <li>Reverse: Reverses the order of play</li>
+            <li>Skip: Skips the next player's turn</li>
+            <li>Draw 2: The next player is forced to draw 2 cards</li>
+            <li>
+              Wild: This card can be played at any time. When it's played you
+              choose a color for the wild to represent
+            </li>
+            <li>
+              Wild Draw 4: Same functionas a Wild and also forces the next
+              player to draw 4 cards
+            </li>
+          </ul>
+          <p>
+            If you are unable to play a card from your hand, you must draw a
+            card. If that card is playable, you may play it. Otherwise it is the
+            next player's turn
+          </p>
+          <button class="btn">Close</button>
+        </div>
       </div>
-      <nav>
-
-      </nav>
+      <nav></nav>
       <div class="play-room">
         <div class="column left">
           <div class="turn-indicator-container">
@@ -77,6 +124,7 @@
           <div class="hand active-player"></div>
         </div>
         <div class="column right">
+          <div class="rules-btn"><p>?</p></div>
         </div>
       </div>
     </div>
