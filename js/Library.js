@@ -1,17 +1,17 @@
 class Library {
-  constructor(){
+  constructor() {
     this.cards = buildLibrary();
     this.cardsRemaining = this.cards.length;
-    this.cardsUsed = 108-this.cards.length;
+    this.cardsUsed = 108 - this.cards.length;
   }
-  flipCard(){
+  flipCard() {
     return this.cards.pop();
   }
 }
 
 const buildLibrary = () => {
   const library = [];
-  const values = ['0','1','2','3','4','5','6','7','8','9','skip','reverse','draw2']
+  const values = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'skip', 'reverse', 'draw2']
   const colors = ['red', 'blue', 'yellow', 'green']
   const specialValues = ['wild', 'wild4']
   //Make colored cards
@@ -20,13 +20,15 @@ const buildLibrary = () => {
       const card = {
         color: colors[i],
         value: values[j],
+        sortValue: `${colors[i]}${values[j]}`,
         isLegal: false
       }
       library.push(card)
-      if (j > 0){
+      if (j > 0) {
         const duplicateCard = {
           color: colors[i],
           value: values[j],
+          sortValue: `${colors[i]}${values[j]}`,
           isLegal: false
         }
         library.push(duplicateCard)
@@ -38,7 +40,9 @@ const buildLibrary = () => {
     for (let j = 0; j < 4; j++) {
       const card = {
         color: 'black',
-        value: specialValues[i]
+        value: specialValues[i],
+        sortValue: `black${specialValues[i]}`,
+        isLegal: false
       }
       library.push(card)
     }
