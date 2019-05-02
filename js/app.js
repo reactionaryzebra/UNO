@@ -239,13 +239,13 @@ const renderTable = () => {
   }
 
   //Display deck and active cards
-  deckDiv.style.backgroundImage = `url(images/large/back.png)`;
+  deckDiv.style.backgroundImage = `url(images/back.png)`;
   if (!legalPlay && game.activePlayer.type === "human") {
     deckDiv.classList.add("legal");
   } else {
     deckDiv.classList.remove("legal");
   }
-  cardsInPlayDiv.style.backgroundImage = `url(images/large/${
+  cardsInPlayDiv.style.backgroundImage = `url(images/${
     game.activeCard.color
   }_${game.activeCard.value}.png)`;
 };
