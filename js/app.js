@@ -44,10 +44,24 @@ const shuffle = array => {
 const deal = (player, numCards) => {
   for (let i = 0; i < numCards; i++) {
     let cardToAdd = deck.cards.pop();
-    cardToAdd.handPosition = player.hand.length;
     player.hand.push(cardToAdd);
   }
 };
+
+const sortHand = player => {
+  player.hand.sort((card1, card2) => {
+    if (card1.sortValue < card2.sortValue) {
+      return -1
+    }
+    if (card1.sortValue > card2.sortValue) {
+      return 1
+    }
+    return 0
+  })
+  for (let i = 0; i < player.hand.length; i++) {
+    player.hand[i].handPosition = i
+  }
+}
 
 //Game Flow Functions
 
@@ -84,6 +98,7 @@ const startGame = namesArr => {
   //Deal 7 to each player
   game.players.forEach(player => {
     deal(player, 7);
+    sortHand(player)
   });
   //Flip a card
   game.cardsInPlay.unshift(deck.cards.pop());
@@ -102,6 +117,7 @@ const startTurn = () => {
   } else if (game.activeCard.value === "wild4") {
     deal(game.activePlayer, 4);
   }
+  sortHand(game.activePlayer)
   checkLegal(game.activePlayer.hand);
   renderTable();
   renderHand();
