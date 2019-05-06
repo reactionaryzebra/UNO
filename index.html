@@ -77,36 +77,333 @@
         <div class="modal-content" id="thank-you-screen">
           <h1>Thanks for playing!</h1>
         </div>
-        <div class="modal-content" id="rules-screen">
-          <h1>Rules</h1>
-          <p>
-            The goal of UNO is to play all of the cards in your hand. On each
-            turn you have to play a card from your hand that matches the card in
-            play either in color or number.
-          </p>
-          <p>There are a few special cards:</p>
-          <ul>
-            <li>Reverse: Reverses the order of play</li>
-            <li>Skip: Skips the next player's turn</li>
-            <li>Draw 2: The next player is forced to draw 2 cards</li>
-            <li>
-              Wild: This card can be played at any time. When it's played you
-              choose a color for the wild to represent
-            </li>
-            <li>
-              Wild Draw 4: Same functionas a Wild and also forces the next
-              player to draw 4 cards
-            </li>
-          </ul>
-          <p>
-            If you are unable to play a card from your hand, you must draw a
-            card. If that card is playable, you may play it. Otherwise it is the
-            next player's turn
-          </p>
-          <button class="btn">Close</button>
+      </div>
+      <div class="instructions-carousel hidden">
+        <div class="close-btn">X</div>
+        <div class="arrow-prev hidden"></div>
+        <div class="arrow-next"></div>
+        <div class="instructions current">
+          <div class="instructions-row row-top">
+            <div>
+              <div class="instruction-number-container">
+                <p class="instruction-number">1</p>
+              </div>
+              <p class="instruction-text">
+                Win the game by being the first player to get rid of all the
+                cards in their hand!
+              </p>
+            </div>
+            <div>
+              <div class="instruction-number-container">
+                <p class="instruction-number">2</p>
+              </div>
+              <p class="instruction-text">
+                During your turn, you may play a card from your hand that
+                matches either the color/symbol or number of the current card in
+                play.
+              </p>
+            </div>
+          </div>
+          <div class="instructions-row row-middle">
+            <div class="instructions-table">
+              <div>
+                <h4>Deck</h4>
+                <img src="./images/back.png" />
+              </div>
+              <div class="">
+                <h4>In Play</h4>
+                <img src="./images/blue_2.png" />
+              </div>
+              <div class="">
+                <h4>Previously Played Cards</h4>
+                <div class="stacked-cards">
+                  <div class="stack-container">
+                    <img src="./images/blue_skip.png" />
+                  </div>
+                  <div class="stack-container">
+                    <img src="./images/blue_6.png" />
+                  </div>
+                  <div class="stack-container">
+                    <img src="./images/blue_0.png" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="instructions-row row-bottom">
+            <div class="yes">
+              <h3>YES!</h3>
+              <img src="./images/red_2.png" />
+            </div>
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/red_8.png" />
+            </div>
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/red_9.png" />
+            </div>
+            <div class="yes">
+              <h3>YES!</h3>
+              <img src="./images/blue_6.png" />
+            </div>
+            <div class="yes">
+              <h3>YES!</h3>
+              <img src="./images/blue_skip.png" />
+            </div>
+            <div class="yes">
+              <h3>YES!</h3>
+              <img src="./images/green_2.png" />
+            </div>
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/yellow_0.png" />
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          <div class="instructions-row row-top">
+            <div>
+              <div class="instruction-number-container">
+                <p class="instruction-number">3</p>
+              </div>
+              <p class="instruction-text">
+                If you have no more matching cards in your hand, you must draw a
+                card and then end your turn.
+              </p>
+            </div>
+          </div>
+          <div class="instructions-row row-middle">
+            <div class="instructions-table">
+              <div>
+                <h4>Deck</h4>
+                <img src="./images/back.png" />
+              </div>
+              <div class="">
+                <h4>In Play</h4>
+                <img src="./images/blue_2.png" />
+              </div>
+              <div class="">
+                <h4>Previously Played Cards</h4>
+                <div class="stacked-cards">
+                  <div class="stack-container">
+                    <img src="./images/blue_skip.png" />
+                  </div>
+                  <div class="stack-container">
+                    <img src="./images/blue_6.png" />
+                  </div>
+                  <div class="stack-container">
+                    <img src="./images/blue_0.png" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="instructions-row row-bottom">
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/red_8.png" />
+            </div>
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/red_9.png" />
+            </div>
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/yellow_0.png" />
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          <div class="instructions-row row-top">
+            <div>
+              <div class="instruction-number-container">
+                <p class="instruction-number">4</p>
+              </div>
+              <p class="instruction-text">
+                However, if the card you drew matches the card in play you may
+                play it.
+              </p>
+            </div>
+          </div>
+          <div class="instructions-row row-middle">
+            <div class="instructions-table">
+              <div>
+                <h4>Deck</h4>
+                <img src="./images/back.png" />
+              </div>
+              <div class="">
+                <h4>In Play</h4>
+                <img src="./images/blue_2.png" />
+              </div>
+              <div class="">
+                <h4>Previously Played Cards</h4>
+                <div class="stacked-cards">
+                  <div class="stack-container">
+                    <img src="./images/blue_skip.png" />
+                  </div>
+                  <div class="stack-container">
+                    <img src="./images/blue_6.png" />
+                  </div>
+                  <div class="stack-container">
+                    <img src="./images/blue_0.png" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="instructions-row row-bottom">
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/red_8.png" />
+            </div>
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/red_9.png" />
+            </div>
+            <div class="no">
+              <h3>NO!</h3>
+              <img src="./images/yellow_0.png" />
+            </div>
+            <div class="yes">
+              <h3>YES!</h3>
+              <img src="./images/yellow_2.png" />
+            </div>
+          </div>
+        </div>
+        <div class="instructions instructions-special">
+          <div class="instructions-row row-top">
+            <div>
+              <div class="instruction-number-container">
+                <p class="instruction-number">5</p>
+              </div>
+              <p class="instruction-text">
+                There are special cards that give powerful effects.
+              </p>
+            </div>
+          </div>
+          <div class="instructions-row row-middle">
+            <div class="instructions-column column">
+              <div class="stacked-cards">
+                <div class="stack-container">
+                  <img src="./images/red_draw2.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/blue_draw2.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/green_draw2.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/yellow_draw2.png" />
+                </div>
+              </div>
+              <p class="instruction-text">
+                +2 cards force the player after you two draw two cards.
+              </p>
+            </div>
+            <div class="instructions-column column">
+              <div class="stacked-cards">
+                <div class="stack-container">
+                  <img src="./images/red_skip.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/blue_skip.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/green_skip.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/yellow_skip.png" />
+                </div>
+              </div>
+              <p class="instruction-text">
+                Skip cards forces the player immediately after you to skip their
+                turn.
+              </p>
+            </div>
+            <div class="instructions-column column">
+              <div class="stacked-cards">
+                <div class="stack-container">
+                  <img src="./images/red_reverse.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/blue_reverse.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/green_reverse.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/yellow_reverse.png" />
+                </div>
+              </div>
+              <p class="instruction-text">
+                Reverse cards reverse the player turn order. The player who went
+                before you will now have their turn after you.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="instructions instructions-special">
+          <div class="instructions-row row-top">
+            <div>
+              <div class="instruction-number-container">
+                <p class="instruction-number">6</p>
+              </div>
+              <p class="instruction-text">
+                Lastly, there are wild cards that can be used to match any
+                color. Once played, you may also choose a new color for them to
+                represent.
+              </p>
+            </div>
+          </div>
+          <div class="instructions-row row-middle">
+            <div class="instructions-column column">
+              <img src="./images/black_wild.png" />
+              <p class="instruction-text">
+                Wild cards can be used as any color. Once played, you must then
+                choose any color for them to represent once in play.
+              </p>
+              <div class="stacked-cards">
+                <div class="stack-container">
+                  <img src="./images/red_wild.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/blue_wild.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/green_wild.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/yellow_wild.png" />
+                </div>
+              </div>
+            </div>
+            <div class="instructions-column column">
+              <img src="./images/black_wild.png" />
+              <p class="instruction-text">
+                Wild +4 cards can also be used as any color. They also force the
+                player after you to draw four cards. You must then choose any
+                color for to represent once in play.
+              </p>
+              <div class="stacked-cards">
+                <div class="stack-container">
+                  <img src="./images/red_wild4.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/blue_wild4.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/green_wild4.png" />
+                </div>
+                <div class="stack-container">
+                  <img src="./images/yellow_wild4.png" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <nav></nav>
       <div class="play-room">
         <div class="column left">
           <div class="turn-indicator-container">
