@@ -417,7 +417,7 @@ input:-webkit-autofill {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 95vh;
+  height: 98vh;
   width: 97vw;
   position: absolute;
 }
@@ -541,6 +541,10 @@ input:-webkit-autofill {
   box-shadow: -6px 5px 4px 0 rgba(0, 0, 0, 0.5);
 }
 
+.instructions-special {
+  justify-content: space-around;
+}
+
 .instructions-column {
   display: flex;
   flex-direction: column;
@@ -581,7 +585,7 @@ input:-webkit-autofill {
     0% 25%,
     50% 25%
   );
-  left: 90%;
+  right: 1%;
   top: 45%;
 }
 
@@ -610,7 +614,7 @@ input:-webkit-autofill {
 .instructions-carousel {
   z-index: 1;
   animation: moveInBottom 1.2s ease-out;
-  height: 95vh;
+  height: 98vh;
   width: 97vw;
   position: absolute;
   left: 1.5vw;
@@ -630,12 +634,20 @@ input:-webkit-autofill {
   color: black;
   position: absolute;
   z-index: 1;
-  right: -10px;
-  top: -12px;
+  right: -6px;
+  top: -5px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+.instructions:last-child .instruction-text {
+  width: 35vw;
+}
+
+.instructions:last-child .column {
+  justify-content: space-around;
 }
