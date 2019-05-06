@@ -9,6 +9,17 @@
   }
 }
 
+@keyframes moveInBottom {
+  0% {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
 @keyframes rubberBand {
   from {
     -webkit-transform: scale3d(1, 1, 1);
@@ -200,6 +211,22 @@ input:-webkit-autofill {
   justify-content: flex-start;
 }
 
+.rules-screen {
+  display: none;
+
+  margin: 0 auto;
+
+  width: 1378px;
+
+  height: 995px;
+
+  border-radius: 8px;
+
+  border: solid 10px #989898;
+
+  background-color: #191919;
+}
+
 .rules-btn {
   background-color: rgb(53, 123, 182);
   border-radius: 100%;
@@ -209,11 +236,7 @@ input:-webkit-autofill {
   justify-content: center;
   align-items: center;
   color: rgb(243, 245, 227);
-}
-
-#rules-screen {
-  flex-direction: column;
-  height: 80%;
+  cursor: pointer;
 }
 
 .middle {
@@ -383,4 +406,248 @@ input:-webkit-autofill {
 
 .visible {
   display: flex;
+}
+
+/*Instructions pages*/
+.instructions {
+  border-radius: 8px;
+  border: solid 10px #989898;
+  background-color: #191919;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 98vh;
+  width: 97vw;
+  position: absolute;
+}
+
+.instructions-row {
+  display: flex;
+}
+
+.instructions-row div {
+  display: flex;
+}
+
+.row-top {
+  justify-content: space-around;
+  margin-top: 5vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.row-middle {
+  justify-content: center;
+}
+
+.row-bottom {
+  justify-content: center;
+}
+
+.instruction-number-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 2vw;
+}
+
+.instruction-number {
+  background-color: #c12e2e;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  align-items: center;
+  font-size: 32px;
+}
+
+.instruction-text {
+  width: 386px;
+  font-family: Futura;
+  font-size: 1.5em;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+.instructions-table {
+  width: 73vw;
+  height: 38vh;
+  border-radius: 8px;
+  border: solid 21px #979797;
+  background-color: #404040;
+  display: flex;
+  justify-content: space-around;
+}
+
+.instructions-table > div {
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.instructions-table img {
+  max-width: 150px;
+  max-height: 209.9px;
+}
+
+.yes,
+.no {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.no {
+  justify-content: flex-end;
+}
+
+.yes img,
+.no img {
+  max-width: 150px;
+  box-shadow: -6px 5px 4px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.yes h3,
+.no h3 {
+  transform: rotate(-30deg);
+  font-family: Futura;
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: condensed;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.yes img {
+  max-height: 181px;
+}
+.no img {
+  max-height: 137px;
+}
+
+.instructions-special img {
+  width: 150px;
+  height: 209.9px;
+  box-shadow: -6px 5px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.instructions-special {
+  justify-content: space-around;
+}
+
+.instructions-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stacked-cards {
+  display: flex;
+  width: 275px;
+}
+
+.stack-container {
+  flex: 1 0 0;
+  overflow-x: hidden;
+}
+
+.stack-container:last-child {
+  flex: 0 0 auto;
+}
+
+.arrow-next,
+.arrow-prev {
+  width: 130px;
+  height: 130.9px;
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.arrow-next {
+  clip-path: polygon(
+    50% 0%,
+    100% 50%,
+    50% 100%,
+    50% 75%,
+    0% 75%,
+    0% 25%,
+    50% 25%
+  );
+  right: 1%;
+  top: 45%;
+}
+
+.arrow-prev {
+  clip-path: polygon(
+    50% 0%,
+    50% 25%,
+    100% 25%,
+    100% 75%,
+    50% 75%,
+    50% 100%,
+    0% 50%
+  );
+  left: 1%;
+  top: 45%;
+}
+
+.instructions-carousel > .instructions {
+  display: none;
+}
+
+.instructions-carousel > div.current {
+  display: flex;
+}
+
+.instructions-carousel {
+  z-index: 1;
+  animation: moveInBottom 1.2s ease-out;
+  height: 98vh;
+  width: 97vw;
+  position: absolute;
+  left: 1.5vw;
+  bottom: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.close-btn {
+  border-radius: 100%;
+  height: 5vh;
+  width: 3vw;
+  border: solid 4px #2b2b2b;
+  background-color: #ffffff;
+  color: black;
+  position: absolute;
+  z-index: 1;
+  right: -6px;
+  top: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.instructions:last-child .instruction-text {
+  width: 35vw;
+}
+
+.instructions:last-child .column {
+  justify-content: space-around;
 }

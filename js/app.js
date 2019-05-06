@@ -6,8 +6,8 @@ let gameOver;
 let allHuman;
 const modal = document.querySelector(".modal");
 const rulesButton = document.querySelector(".rules-btn");
-const rulesScreen = document.querySelector("#rules-screen");
-const rulesClose = document.querySelector("#rules-screen .btn");
+const rulesCarousel = document.querySelector(".instructions-carousel");
+const rulesClose = rulesCarousel.querySelector(".close-btn");
 const selectPlayers = document.querySelector(".select-players");
 const playerTypeSelect = document.querySelector(".human-or-computer");
 const secondPlayerNameInput = document.querySelector(
@@ -29,6 +29,14 @@ const opponentTurnIndicator = document.querySelector(
   ".opponent-turn-indicator"
 );
 const playerTurnIndicator = document.querySelector(".player-turn-indicator");
+const carousel = document.querySelector(".instructions-carousel");
+const carouselItems = document.querySelectorAll(
+  ".instructions-carousel > .instructions"
+);
+let current = carouselItems[0];
+const next = document.querySelector(".arrow-next");
+const prev = document.querySelector(".arrow-prev");
+let carouselCounter = 0;
 
 //Game Operation Functions
 
@@ -51,17 +59,17 @@ const deal = (player, numCards) => {
 const sortHand = player => {
   player.hand.sort((card1, card2) => {
     if (card1.sortValue < card2.sortValue) {
-      return -1
+      return -1;
     }
     if (card1.sortValue > card2.sortValue) {
-      return 1
+      return 1;
     }
-    return 0
-  })
+    return 0;
+  });
   for (let i = 0; i < player.hand.length; i++) {
-    player.hand[i].handPosition = i
+    player.hand[i].handPosition = i;
   }
-}
+};
 
 //Game Flow Functions
 
@@ -98,7 +106,7 @@ const startGame = namesArr => {
   //Deal 7 to each player
   game.players.forEach(player => {
     deal(player, 7);
-    sortHand(player)
+    sortHand(player);
   });
   //Flip a card
   game.cardsInPlay.unshift(deck.cards.pop());
@@ -117,7 +125,7 @@ const startTurn = () => {
   } else if (game.activeCard.value === "wild4") {
     deal(game.activePlayer, 4);
   }
-  sortHand(game.activePlayer)
+  sortHand(game.activePlayer);
   checkLegal(game.activePlayer.hand);
   renderTable();
   renderHand();
@@ -200,6 +208,23 @@ const checkForUno = players => {
 
 //Render Functions
 
+const navigateCarousel = direction => {
+  current.classList.remove("current");
+  carouselCounter = carouselCounter + direction;
+  if (carouselCounter === 0) {
+    prev.classList.add("hidden");
+  } else if (carouselCounter > 0 && carouselCounter < 5) {
+    prev.classList.remove("hidden");
+  }
+  if (carouselCounter === 4) {
+    next.classList.add("hidden");
+  } else if (carouselCounter < 4 && carouselCounter > -1) {
+    next.classList.remove("hidden");
+  }
+  current = carouselItems[carouselCounter];
+  current.classList.add("current");
+};
+
 const renderWinnerScreen = () => {
   modal.classList.toggle("visible");
   winnerScreen.classList.toggle("visible");
@@ -261,9 +286,9 @@ const renderTable = () => {
   } else {
     deckDiv.classList.remove("legal");
   }
-  cardsInPlayDiv.style.backgroundImage = `url(images/${
-    game.activeCard.color
-  }_${game.activeCard.value}.png)`;
+  cardsInPlayDiv.style.backgroundImage = `url(images/${game.activeCard.color}_${
+    game.activeCard.value
+  }.png)`;
 };
 
 const renderHand = () => {
@@ -317,13 +342,19 @@ const renderTurnIndicator = () => {
 //Event listeners
 
 rulesButton.addEventListener("click", e => {
-  modal.classList.toggle("visible");
-  rulesScreen.classList.toggle("visible");
+  rulesCarousel.classList.remove("hidden");
 });
 
 rulesClose.addEventListener("click", e => {
-  modal.classList.toggle("visible");
-  rulesScreen.classList.toggle("visible");
+  rulesCarousel.classList.add("hidden");
+});
+
+next.addEventListener("click", () => {
+  navigateCarousel(1);
+});
+
+prev.addEventListener("click", () => {
+  navigateCarousel(-1);
 });
 
 playerTypeSelect.addEventListener("change", e => {
